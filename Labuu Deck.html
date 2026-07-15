@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Labuu — Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F2EC;--ink:#0D0D0D;--ink-2:#1f1f1f;--muted:#6b6258;--rule:rgba(13,13,13,.12);
+    --paper:#FFFCF6;--accent:#E47310;--accent-deep:#a85309;--accent-soft:rgba(228,115,16,.08);
+    --type-title:64px;--type-subtitle:40px;--type-body:30px;--type-small:24px;
+    --pad-x:100px;--pad-top:90px;--pad-bottom:80px;--gap-title:44px;--gap-item:24px;
+  }
+  *{box-sizing:border-box}
+  deck-stage:not(:defined){visibility:hidden}
+  body{margin:0;font-family:"Space Grotesk",sans-serif;background:#222}
+  section{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",sans-serif}
+  img{max-width:100%;display:block}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:24px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-weight:600}
+  .eyebrow.on-dark{color:var(--accent)}
+  .title{font-family:"Archivo Narrow",sans-serif;font-weight:800;font-size:var(--type-title);line-height:1.06;letter-spacing:-.015em;color:var(--ink);margin:0;text-wrap:balance}
+  .title.on-dark{color:var(--bg)}
+  .lead{font-family:"Space Grotesk",sans-serif;font-size:var(--type-body);line-height:1.4;color:var(--muted);margin:0;max-width:26ch}
+  .lead.on-dark{color:rgba(245,242,236,.72)}
+  .slide-pad{position:absolute;left:var(--pad-x);right:var(--pad-x);top:var(--pad-top);bottom:var(--pad-bottom)}
+
+  /* ---- Cover ---- */
+  .cover{background:var(--bg)}
+  .cover::before{content:"";position:absolute;left:-10%;top:-30%;width:60%;height:100%;background:radial-gradient(circle,var(--accent-soft),transparent 70%);filter:blur(60px)}
+  .cover-wordmark{width:420px;height:auto}
+  .cover-tag{display:inline-flex;align-items:center;gap:12px;padding:12px 22px 12px 16px;border:1px solid var(--rule);border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:24px;letter-spacing:.08em;color:var(--ink-2);width:fit-content}
+  .cover-tag .dot{width:14px;height:14px;border-radius:50%;background:var(--accent)}
+  .cover-headline{font-family:"Archivo Narrow",sans-serif;font-weight:800;font-size:84px;line-height:1.08;letter-spacing:-.015em;color:var(--ink);margin:0;max-width:20ch;text-wrap:balance}
+  .cover-headline .accent{color:var(--accent)}
+  .cover-sub{font-size:32px;color:var(--muted);line-height:1.4;margin:0;max-width:42ch}
+
+  /* ---- Pains ---- */
+  .pains-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;row-gap:0;border-top:2px solid var(--rule)}
+  .pain-row{display:flex;align-items:flex-start;gap:22px;padding:26px 0;border-bottom:2px solid var(--rule)}
+  .pain-x{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;margin-top:2px}
+  .pain-x svg{width:18px;height:18px}
+  .pain-row p{margin:0;font-size:var(--type-small);line-height:1.35;color:var(--ink-2)}
+
+  /* ---- Dark section (Como funciona) ---- */
+  .dark{background:var(--ink);color:var(--bg)}
+  .steps-grid{display:grid;gap:28px}
+  .steps-grid.n4{grid-template-columns:repeat(4,1fr)}
+  .steps-grid.n3{grid-template-columns:repeat(3,1fr)}
+  .step-card{background:rgba(245,242,236,.04);border:1px solid rgba(245,242,236,.1);border-radius:20px;padding:32px 26px;display:flex;flex-direction:column;gap:14px}
+  .step-card .n{font-family:"Archivo Narrow",sans-serif;font-weight:800;font-size:56px;color:var(--accent);line-height:1}
+  .step-card h3{margin:0;font-family:"Archivo",sans-serif;font-weight:700;font-size:26px;color:var(--bg)}
+  .step-card p{margin:0;font-size:24px;line-height:1.4;color:rgba(245,242,236,.7)}
+
+  /* ---- Benefits ---- */
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:2px solid var(--rule);border-radius:20px;overflow:hidden}
+  .benefit-card{background:var(--paper);padding:34px 30px;display:flex;flex-direction:column;gap:16px}
+  .benefit-check{width:52px;height:52px;border-radius:14px;background:var(--accent);color:#0D0D0D;display:grid;place-items:center;font-family:"Archivo",sans-serif;font-weight:900;font-size:24px}
+  .benefit-card h3{margin:0;font-family:"Archivo",sans-serif;font-weight:700;font-size:24px;color:var(--ink)}
+  .benefit-card p{margin:0;font-size:24px;line-height:1.4;color:var(--muted)}
+
+  /* ---- Support ---- */
+  .support{background:var(--accent);color:#0D0D0D}
+  .support .title{color:#0D0D0D}
+  .support .lead{color:rgba(13,13,13,.75)}
+  .support-list{list-style:none;margin:32px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+  .support-list li{display:flex;gap:14px;align-items:center;font-size:var(--type-small);font-weight:600;color:#0D0D0D}
+  .support-list li::before{content:"→";font-family:"JetBrains Mono",monospace;font-weight:700}
+  .seal-img{width:340px;height:340px;border-radius:50%;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25),0 0 0 8px #0D0D0D}
+  .seal-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+
+  /* ---- Testimonials ---- */
+  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  .testi-card{background:var(--paper);border:2px solid var(--rule);border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:22px}
+  .testi-card blockquote{margin:0;font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:26px;line-height:1.32;color:var(--ink)}
+  .testi-who{display:flex;align-items:center;gap:16px;border-top:2px solid var(--rule);padding-top:18px}
+  .testi-avi{width:52px;height:52px;border-radius:50%;background:var(--accent);color:#0D0D0D;display:grid;place-items:center;font-family:"Archivo",sans-serif;font-weight:800;font-size:20px;flex:none}
+  .testi-meta{display:flex;flex-direction:column}
+  .testi-name{font-size:22px;font-weight:600;color:var(--ink)}
+  .testi-loc{font-family:"JetBrains Mono",monospace;font-size:16px;color:var(--muted)}
+
+  /* ---- Stats ---- */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .stat-box{background:rgba(245,242,236,.04);border:1px solid rgba(245,242,236,.1);border-radius:20px;padding:36px 24px;display:flex;flex-direction:column;gap:12px}
+  .stat-box .num{font-family:"Archivo Narrow",sans-serif;font-weight:800;font-size:76px;color:var(--accent);line-height:1;letter-spacing:-.02em}
+  .stat-box .lbl{font-family:"JetBrains Mono",monospace;font-size:19px;text-transform:uppercase;letter-spacing:.06em;color:rgba(245,242,236,.7);line-height:1.35}
+
+  /* ---- Closing ---- */
+  .closing{background:var(--ink);color:var(--bg)}
+  .closing::before{content:"";position:absolute;left:-10%;top:-30%;width:600px;height:600px;background:radial-gradient(circle,var(--accent-soft),transparent 70%);filter:blur(40px)}
+  .ps-btn{display:inline-flex;align-items:center;gap:18px;padding:22px 34px 22px 28px;border-radius:16px;background:var(--accent);color:#0D0D0D;font-family:"Space Grotesk",sans-serif;box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 10px 26px rgba(228,115,16,.35);width:fit-content}
+  .ps-btn .icon{width:44px;height:44px;flex:none}
+  .ps-btn .lbl{display:flex;flex-direction:column;line-height:1}
+  .ps-btn .lbl small{font-size:16px;font-family:"JetBrains Mono",monospace;letter-spacing:.06em;color:rgba(13,13,13,.65);text-transform:uppercase;margin-bottom:6px}
+  .ps-btn .lbl strong{font-family:"Archivo",sans-serif;font-weight:700;font-size:30px;letter-spacing:-.01em}
+  .closing-mascot{width:100%;height:100%;object-fit:cover;border-radius:24px}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+<section data-label="Capa" class="cover">
+  <div class="slide-pad" style="display:flex;flex-direction:column;justify-content:center;gap:36px">
+    <img class="cover-wordmark" src="assets/labuu-wordmark-orange.png" alt="Labuu">
+    <div class="cover-tag"><span class="dot"></span><span>Para ajudantes e contratantes de obra</span></div>
+    <h1 class="cover-headline">O app que conecta quem toca a obra a quem <span class="accent">trabalha</span> nela.</h1>
+    <p class="cover-sub">Ajudantes recebem chamados direto no celular. Empreiteiros contratam reforço com histórico verificado. Em minutos, dos dois lados.</p>
+  </div>
+</section>
+
+<section data-label="O Problema — Ajudante">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow">Pra quem trabalha em obra</div>
+      <h2 class="title">O problema não é falta de trabalho. É falta de visibilidade.</h2>
+      <p class="lead">Quem não te conhece, não te contrata. E a fila de indicação só tem vaga pra quem já tem conhecido.</p>
+    </div>
+    <div class="pains-grid">
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Ficar a semana inteira esperando o celular tocar.</p></div>
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Perder trampo pra quem foi chamado primeiro.</p></div>
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Depender do grupo de zap pra te indicar.</p></div>
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Não ter como mostrar seu trabalho pra quem ainda não te conhece.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="O Problema — Contratante">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow">Pra quem toca obra</div>
+      <h2 class="title">Você não precisa de mais um contato. Precisa de gente que aparece.</h2>
+      <p class="lead">Indicação é boa — até o dia que ela falha. Quando o reforço não vem, a obra para.</p>
+    </div>
+    <div class="pains-grid">
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Atrasar a obra porque não achou ajudante na hora certa.</p></div>
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Pegar alguém sem histórico e o serviço não render.</p></div>
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Contar com o ajudante no dia e ele não aparecer.</p></div>
+      <div class="pain-row"><div class="pain-x"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"></line><line x1="10" y1="2" x2="2" y2="10"></line></svg></div><p>Mandar zap em 5 grupos e ninguém aparecer.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Como Funciona — Ajudante" class="dark">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow on-dark">Como a Labuu resolve</div>
+      <h2 class="title on-dark">Seu histórico fala por você.</h2>
+      <p class="lead on-dark">Cada serviço que você faz gera uma avaliação — e quanto melhor ela for, mais chamados você recebe.</p>
+    </div>
+    <div class="steps-grid n4">
+      <div class="step-card"><div class="n">01</div><h3>Baixa o app e cria seu perfil</h3><p>Nome, tipo de serviço e região. Leva 5 minutos. Tudo gratuito.</p></div>
+      <div class="step-card"><div class="n">02</div><h3>Empreiteiros te encontram</h3><p>Quando precisam de reforço, abrem o app e veem seu histórico.</p></div>
+      <div class="step-card"><div class="n">03</div><h3>Recebe o chamado direto</h3><p>Sem intermediário. Sem boca-a-boca. Sem esperar grupo te chamar.</p></div>
+      <div class="step-card"><div class="n">04</div><h3>Trabalha com pagamento garantido</h3><p>Dinheiro fica retido na plataforma antes de você começar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Como Funciona — Contratante" class="dark">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow on-dark">Como a Labuu resolve</div>
+      <h2 class="title on-dark">Reforço com perfil qualificado e histórico de jornada.</h2>
+      <p class="lead on-dark">Os ajudantes na Labuu já trabalharam em obras avaliadas. Você vê o histórico antes de decidir.</p>
+    </div>
+    <div class="steps-grid n3">
+      <div class="step-card"><div class="n">01</div><h3>Descreva a diária</h3><p>Informe local, horário e o serviço. Em poucos minutos seu pedido está no ar.</p></div>
+      <div class="step-card"><div class="n">02</div><h3>Escolha o ajudante</h3><p>Defina o perfil ideal, próximo de você.</p></div>
+      <div class="step-card"><div class="n">03</div><h3>Contrate e avalie</h3><p>Contrate pelo histórico e avalie ao fim da diária.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Benefícios — Ajudante">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow">O que muda na sua semana</div>
+      <h2 class="title">6 coisas que você ganha — hoje.</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Visibilidade onde tem trabalho</h3><p>Você aparece pra quem contrata perto — sem mandar mensagem em grupo.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Histórico registrado pra sempre</h3><p>Cada serviço bem feito vira prova pro próximo contrato.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Chamados chegam até você</h3><p>Empreiteiros te encontram pelo app. Você não precisa procurar.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Pagamento garantido</h3><p>Dinheiro retido antes do serviço começar. Sem risco de calote.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>App 100% gratuito</h3><p>Sem complicação.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Base que volta a te chamar</h3><p>Quanto mais você trabalha bem, mais o app te indica.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Benefícios — Contratante">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow">O que muda na sua obra</div>
+      <h2 class="title">6 coisas que mudam na sua obra.</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Histórico verificado</h3><p>Veja avaliações reais de quem já contratou aquele ajudante antes.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Reforço em até 24h</h3><p>Cadastra a obra e ajudantes da região chegam no seu painel.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Pagamento só depois do serviço</h3><p>Valor fica retido na plataforma.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Sua rede de confiança cresce</h3><p>Marca seus favoritos e chama eles primeiro nas próximas obras.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Plano gratuito</h3><p>Contratou, resolveu. Sem complicação.</p></div>
+      <div class="benefit-card"><div class="benefit-check">✓</div><h3>Suporte direto no app</h3><p>Problema na obra? Fala com a gente. Resolve no mesmo dia.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Suporte" class="support">
+  <div class="slide-pad" style="display:grid;grid-template-columns:1.3fr auto;gap:64px;align-items:center">
+    <div>
+      <div class="eyebrow" style="color:rgba(13,13,13,.7)">Suporte</div>
+      <h2 class="title" style="margin-top:18px">Travou na obra? A gente entra em ação.</h2>
+      <p class="lead" style="margin-top:22px">Suporte humano direto pelo app, do cadastro ao pagamento. Sem dúvida ou problema, a gente resolve no mesmo dia.</p>
+      <ul class="support-list">
+        <li>Suporte humano no app, todo dia</li>
+        <li>Dúvida resolvida no mesmo dia</li>
+        <li>Pagamento garantido</li>
+      </ul>
+    </div>
+    <div class="seal-img"><img src="assets/support-agent.jpeg" alt="Suporte Labuu"></div>
+  </div>
+</section>
+
+<section data-label="Depoimentos">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow">Quem já usa</div>
+      <h2 class="title">Dos dois lados do canteiro.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <blockquote>Antes eu ficava 2 semanas parado. Depois da Labuu, já tive chamado na primeira semana.</blockquote>
+        <div class="testi-who"><div class="testi-avi">C</div><div class="testi-meta"><span class="testi-name">Cícero Andrade</span><span class="testi-loc">Ajudante de obra · Recife, PE</span></div></div>
+      </div>
+      <div class="testi-card">
+        <blockquote>Faltou um servente de última hora. Cadastrei na Labuu, em 3 horas tinha 4 perfis pra escolher.</blockquote>
+        <div class="testi-who"><div class="testi-avi">M</div><div class="testi-meta"><span class="testi-name">Marcos Tavares</span><span class="testi-loc">Empreiteiro · Belo Horizonte, MG</span></div></div>
+      </div>
+      <div class="testi-card">
+        <blockquote>Trabalhei sabendo que o dinheiro já tava garantido. Isso fez diferença.</blockquote>
+        <div class="testi-who"><div class="testi-avi">J</div><div class="testi-meta"><span class="testi-name">Joelson Ribeiro</span><span class="testi-loc">Ajudante · Salvador, BA</span></div></div>
+      </div>
+      <div class="testi-card">
+        <blockquote>Saí dos grupos de WhatsApp. Hoje contrato direto pelo app e tenho histórico de quem é bom.</blockquote>
+        <div class="testi-who"><div class="testi-avi">R</div><div class="testi-meta"><span class="testi-name">Renata Alves</span><span class="testi-loc">Contratante · Curitiba, PR</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Resultados" class="dark">
+  <div class="slide-pad" style="display:flex;flex-direction:column;gap:var(--gap-title);justify-content:center">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow on-dark">Resultados até agora</div>
+      <h2 class="title on-dark">Crescendo dos dois lados da obra.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="num">+340</div><div class="lbl">Ajudantes cadastrados</div></div>
+      <div class="stat-box"><div class="num">+120</div><div class="lbl">Obras atendidas</div></div>
+      <div class="stat-box"><div class="num">24h</div><div class="lbl">Tempo médio pra contratar</div></div>
+      <div class="stat-box"><div class="num">4.8★</div><div class="lbl">Avaliação média do app</div></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Baixe o App" class="closing">
+  <div class="slide-pad" style="display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div class="eyebrow on-dark">Baixe agora · grátis</div>
+      <h2 class="title on-dark">O app que conecta ajudantes a quem precisa de reforço na obra.</h2>
+      <p class="lead on-dark">Dos dois lados do canteiro. Gratuito pra baixar e usar.</p>
+      <a class="ps-btn" href="#">
+        <svg class="icon" viewBox="0 0 512 512" aria-hidden="true">
+          <defs>
+            <linearGradient id="pg-blue2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00C3FF"></stop><stop offset="1" stop-color="#1A73E8"></stop></linearGradient>
+            <linearGradient id="pg-red2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF3A44"></stop><stop offset="1" stop-color="#C31162"></stop></linearGradient>
+            <linearGradient id="pg-yellow2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD500"></stop><stop offset="1" stop-color="#FFA000"></stop></linearGradient>
+            <linearGradient id="pg-green2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00F076"></stop><stop offset="1" stop-color="#00B14F"></stop></linearGradient>
+          </defs>
+          <path fill="url(#pg-blue2)" d="M61 30c-7 7-11 18-11 32v388c0 14 4 25 11 32l2 2 217-217v-22L63 28l-2 2z"></path>
+          <path fill="url(#pg-red2)" d="M61 30L280 249 354 175 95 27c-13-7-25-7-34 3z"></path>
+          <path fill="url(#pg-yellow2)" d="M353 339L280 263 61 482c10 10 22 10 34 3l258-146z"></path>
+          <path fill="url(#pg-green2)" d="M353 175L280 249l73 73 102-58c20-11 20-27 0-38l-102-51z"></path>
+        </svg>
+        <span class="lbl"><small>Baixe na</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+    <img class="closing-mascot" src="assets/labu-mascot.jpeg" alt="Labu, mascote da Labuu">
+  </div>
+</section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>
