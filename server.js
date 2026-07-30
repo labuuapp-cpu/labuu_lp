@@ -1,20 +1,24 @@
 const express = require("express");
+const path = require("path");
 const crypto = require("crypto");
 
 const app = express();
 app.use(express.json());
 
+const PUBLIC_DIR = path.join(__dirname, "public");
 const PIXEL_CODE = "D9LP76JC77U97D5Q1GBG";
 const ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN;
 
-app.post("/track", async (req, res) => {
+app.post("/api/track", async (req, res) => {
+  res.json({ ok: true });
+
   if (!ACCESS_TOKEN) {
     console.error("TIKTOK_ACCESS_TOKEN not set");
-    return res.status(500).json({ ok: false });
+    return;
   }
 
   const { event, event_id, url, referrer } = req.body || {};
-  if (!event) return res.status(400).json({ ok: false, error: "missing event" });
+  if (!event) return;
 
   const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").split(",")[0].trim();
   const userAgent = req.headers["user-agent"] || "";
@@ -49,11 +53,15 @@ app.post("/track", async (req, res) => {
   } catch (err) {
     console.error("TikTok API request failed", err);
   }
-
-  res.json({ ok: true });
 });
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`api listening on ${PORT}`));
+app.use(express.static(PUBLIC_DIR));
+
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(PUBLIC_DIR, "index.html"));
+});
+
+const PORT = process.env.PORT || 80;
+app.listen(PORT, () => console.log(`listening on ${PORT}`));
