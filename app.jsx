@@ -422,6 +422,24 @@ function PhoneMockup({ audience }) {
 // ───────────────────── Pre-launch popup ─────────────────────
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JF9DPRxdNcTEAchIvnKHmw?s=cl&p=a&ilr=4";
 
+function trackWhatsAppClick() {
+  const event_id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
+
+  if (window.ttq) ttq.track("Contact", {}, { event_id });
+
+  const body = JSON.stringify({
+    event: "Contact",
+    event_id,
+    url: window.location.href,
+    referrer: document.referrer,
+  });
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon("/api/track", new Blob([body], { type: "application/json" }));
+  } else {
+    fetch("/api/track", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true });
+  }
+}
+
 function PrelaunchModal({ onClose }) {
   return (
     <div className="prelaunch-overlay" role="dialog" aria-modal="true" onClick={onClose}>
@@ -430,7 +448,7 @@ function PrelaunchModal({ onClose }) {
         <div className="prelaunch-badge">🔥 VAGAS LIMITADAS · PRÉ-LANÇAMENTO</div>
         <h3>O app Labuu está chegando — e você pode entrar antes de todo mundo</h3>
         <p>Entre agora no grupo oficial de pré-lançamento no WhatsApp e garanta benefícios exclusivos, só pra quem chegar cedo.</p>
-        <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" className="prelaunch-cta" onClick={onClose}>
+        <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" className="prelaunch-cta" onClick={() => { trackWhatsAppClick(); onClose(); }}>
           👉 Entrar no grupo de pré-lançamento
         </a>
       </div>
