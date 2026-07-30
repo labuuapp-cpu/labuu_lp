@@ -419,10 +419,30 @@ function PhoneMockup({ audience }) {
 
 }
 
+// ───────────────────── Pre-launch popup ─────────────────────
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JF9DPRxdNcTEAchIvnKHmw?s=cl&p=a&ilr=4";
+
+function PrelaunchModal({ onClose }) {
+  return (
+    <div className="prelaunch-overlay" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="prelaunch-card" onClick={(e) => e.stopPropagation()}>
+        <button className="prelaunch-close" onClick={onClose} aria-label="Fechar">×</button>
+        <div className="prelaunch-badge">🔥 VAGAS LIMITADAS · PRÉ-LANÇAMENTO</div>
+        <h3>O app Labuu está chegando — e você pode entrar antes de todo mundo</h3>
+        <p>Entre agora no grupo oficial de pré-lançamento no WhatsApp e garanta benefícios exclusivos, só pra quem chegar cedo.</p>
+        <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" className="prelaunch-cta" onClick={onClose}>
+          👉 Entrar no grupo de pré-lançamento
+        </a>
+      </div>
+    </div>);
+
+}
+
 // ───────────────────── App ─────────────────────
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [audience, setAudience] = useState("ajudante");
+  const [showPrelaunch, setShowPrelaunch] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -438,11 +458,17 @@ function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setShowPrelaunch(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
   const c = CONTENT[audience];
   const otherAudience = audience === "ajudante" ? "contratante" : "ajudante";
 
   return (
     <div data-screen-label="Labuu LP" data-audience={audience}>
+      {showPrelaunch && <PrelaunchModal onClose={() => setShowPrelaunch(false)} />}
       {/* Nav */}
       <nav className="nav">
         <div className="wrap nav-inner">
