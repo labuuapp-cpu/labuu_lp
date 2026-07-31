@@ -7,7 +7,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "headline": "C"
 } /*EDITMODE-END*/;
 
-const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.labuu";
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JF9DPRxdNcTEAchIvnKHmw?s=cl&p=a&ilr=4";
 
 // ───────────────────── Conteúdo por audiência ─────────────────────
 const CONTENT = {
@@ -169,7 +169,7 @@ function AudienceToggle({ value, onChange }) {
 // ───────────────────── Play Store Button ─────────────────────
 function PlayBadge({ orange = false, big = false }) {
   return (
-    <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer"
+    <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}
     className={"ps-btn" + (orange ? " is-orange" : "")}
     style={big ? { padding: "20px 32px 20px 26px" } : null}>
       <svg className="icon" viewBox="0 0 512 512" aria-hidden="true">
@@ -420,8 +420,6 @@ function PhoneMockup({ audience }) {
 }
 
 // ───────────────────── Pre-launch popup ─────────────────────
-const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JF9DPRxdNcTEAchIvnKHmw?s=cl&p=a&ilr=4";
-
 function trackWhatsAppClick() {
   const event_id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
 
@@ -498,7 +496,7 @@ function App() {
             <a href="#beneficios">Benefícios</a>
             <a href="#faq">Dúvidas</a>
           </div>
-          <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
+          <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" className="nav-cta" onClick={trackWhatsAppClick}>
             Baixar app <span>→</span>
           </a>
         </div>
@@ -743,7 +741,7 @@ function App() {
       </footer>
 
       {/* Sticky CTA (mobile) */}
-      <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer"
+      <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}
       className={`sticky-cta ${scrolled ? "show" : ""}`}>
         <span>Baixar na Google Play</span>
         <span className="arrow">→</span>
