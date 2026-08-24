@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Política de Privacidade — Labuu</title>
+
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#F5F2EC;
+    --ink:#0D0D0D;
+    --ink-2:#1f1f1f;
+    --muted:#6b6258;
+    --rule:rgba(13,13,13,.12);
+    --rule-2:rgba(13,13,13,.06);
+    --paper:#FFFCF6;
+    --accent:#E47310;
+    --accent-deep:#a85309;
+    --accent-soft:rgba(228,115,16,.08);
+    --container:860px;
+    --pad-x:clamp(20px, 5vw, 64px);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:var(--accent);color:#fff}
+  img{max-width:100%;display:block}
+  a{color:var(--accent)}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--pad-x)}
+
+  .nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--rule-2)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px var(--pad-x);max-width:var(--container);margin:0 auto}
+  .logo-wordmark{height:26px;width:auto}
+  .nav-back{font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;color:var(--ink-2);
+    text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .nav-back:hover{color:var(--accent)}
+
+  .policy-hero{padding:56px 0 24px}
+  .policy-badge{display:inline-flex;align-items:center;gap:6px;font-family:"JetBrains Mono",monospace;
+    font-size:11.5px;letter-spacing:.1em;font-weight:700;color:#0D0D0D;background:var(--accent);
+    border-radius:999px;padding:6px 14px;margin-bottom:18px}
+  .policy-hero h1{margin:0 0 16px;font-family:"Archivo Narrow",sans-serif;font-weight:800;
+    font-size:clamp(30px, 4.4vw, 44px);line-height:1.1;letter-spacing:-.015em}
+  .policy-hero p{margin:0;font-size:16px;line-height:1.6;color:var(--muted);max-width:62ch}
+
+  .policy-sections{padding:16px 0 80px}
+  .policy-section{padding:32px 0;border-top:1px solid var(--rule)}
+  .policy-num{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--accent-deep);font-weight:700}
+  .policy-section h2{margin:8px 0 14px;font-family:"Archivo",sans-serif;font-weight:800;font-size:21px;color:var(--ink)}
+  .policy-section p{margin:0 0 12px;font-size:15px;line-height:1.65;color:var(--ink-2)}
+  .policy-section ul{margin:0 0 12px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .policy-section ul li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--ink-2)}
+  .policy-section ul li::before{content:"→";font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--accent);flex:none}
+
+  .policy-contact{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:24px 28px;margin-top:8px}
+  .policy-contact strong{display:block;font-family:"Archivo",sans-serif;font-size:16px;margin-bottom:8px;color:var(--ink)}
+  .policy-contact a{display:block;font-size:14.5px;color:var(--ink-2);text-decoration:none;margin-bottom:4px}
+  .policy-contact a:hover{color:var(--accent)}
+
+  .site-footer{border-top:1px solid var(--rule-2);padding:28px 0;background:var(--bg)}
+  .footer-bottom{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;
+    font-family:"Archivo",sans-serif;font-size:13px;color:var(--muted)}
+  .footer-bottom a{color:var(--muted);text-decoration:none}
+  .footer-bottom a:hover{color:var(--accent)}
+  .sep{opacity:.5}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" aria-label="Labuu — início">
+      <img class="logo-wordmark" src="assets/labuu-wordmark-orange.png" alt="Labuu" />
+    </a>
+    <a class="nav-back" href="index.html">← Voltar pro site</a>
+  </div>
+</nav>
+
+<header class="policy-hero">
+  <div class="wrap">
+    <div class="policy-badge">LGPD · Lei 13.709/2018</div>
+    <h1>Política de Privacidade</h1>
+    <p>A Labuu, o app do ajudante, valoriza a privacidade e a proteção dos dados pessoais de seus usuários. Esta política descreve como coletamos, utilizamos, armazenamos e protegemos as informações fornecidas por meio deste site.</p>
+  </div>
+</header>
+
+<main class="policy-sections">
+  <div class="wrap">
+
+    <section class="policy-section">
+      <div class="policy-num">01</div>
+      <h2>Dados Coletados</h2>
+      <p>No cadastro de pré-lançamento, coletamos as seguintes informações fornecidas voluntariamente pelo usuário:</p>
+      <ul>
+        <li>Nome e sobrenome</li>
+        <li>Número de celular / WhatsApp</li>
+        <li>Cidade onde atua</li>
+        <li>Interesse (ajudante ou contratante)</li>
+        <li>Especialidade</li>
+        <li>Maior dificuldade para conseguir serviço</li>
+      </ul>
+      <p>Também podemos coletar informações de navegação, como endereço IP, tipo de dispositivo, navegador utilizado, páginas visitadas e tempo de permanência no site.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">02</div>
+      <h2>Finalidade da Coleta de Dados</h2>
+      <p>Os dados coletados são utilizados para:</p>
+      <ul>
+        <li>Entrar em contato com o usuário, inclusive pelo WhatsApp</li>
+        <li>Avisar sobre o lançamento do app e novidades da Labuu</li>
+        <li>Conectar ajudantes e contratantes de acordo com o perfil informado</li>
+        <li>Responder solicitações e dúvidas</li>
+        <li>Melhorar a experiência de navegação no site</li>
+        <li>Cumprir obrigações legais e regulatórias</li>
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">03</div>
+      <h2>Compartilhamento de Dados</h2>
+      <p>A Labuu não comercializa dados pessoais. As informações poderão ser compartilhadas apenas:</p>
+      <ul>
+        <li>Quando necessário para a prestação dos serviços</li>
+        <li>Com fornecedores que auxiliem na operação do site</li>
+        <li>Para cumprimento de obrigações legais ou determinação de autoridades competentes</li>
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">04</div>
+      <h2>Cookies e Tecnologias de Rastreamento</h2>
+      <p>Este site poderá utilizar cookies e tecnologias semelhantes para melhorar a navegação, analisar o desempenho do site e medir a eficácia de campanhas publicitárias.</p>
+      <p>Os dados coletados por essas tecnologias podem incluir informações de navegação e interação com o site.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">05</div>
+      <h2>Segurança das Informações</h2>
+      <p>Adotamos medidas técnicas e organizacionais adequadas para proteger os dados pessoais contra acesso não autorizado, perda, alteração ou divulgação indevida.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">06</div>
+      <h2>Direitos do Titular dos Dados</h2>
+      <p>Nos termos da Lei Geral de Proteção de Dados (LGPD), o usuário poderá solicitar:</p>
+      <ul>
+        <li>Confirmação da existência de tratamento de dados</li>
+        <li>Acesso aos dados pessoais</li>
+        <li>Correção de dados incompletos ou desatualizados</li>
+        <li>Exclusão de dados pessoais quando aplicável</li>
+        <li>Informações sobre compartilhamento de dados</li>
+        <li>Revogação do consentimento</li>
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">07</div>
+      <h2>Retenção dos Dados</h2>
+      <p>Os dados pessoais serão armazenados pelo tempo necessário para atender às finalidades descritas nesta política ou conforme exigido pela legislação aplicável.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">08</div>
+      <h2>Contato</h2>
+      <p>Em caso de dúvidas sobre esta Política de Privacidade ou sobre o tratamento de dados pessoais, entre em contato pelos canais oficiais:</p>
+      <div class="policy-contact">
+        <strong>Labuu — o app do ajudante</strong>
+        <a href="mailto:administracao@labuu.com.br">administracao@labuu.com.br</a>
+        <a href="tel:+551128066497">(11) 2806-6497</a>
+        <a href="https://wa.me/551129378525" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">09</div>
+      <h2>Alterações nesta Política</h2>
+      <p>Esta Política de Privacidade poderá ser atualizada a qualquer momento para refletir mudanças legais, regulatórias ou operacionais. Recomendamos a consulta periódica desta página.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    <span>© 2026 Labuu</span>
+    <span><a href="index.html">Voltar pro site</a><span class="sep"> · </span><a href="mailto:administracao@labuu.com.br">Falar com a Labuu</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

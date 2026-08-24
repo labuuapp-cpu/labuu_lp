@@ -167,9 +167,9 @@ function AudienceToggle({ value, onChange }) {
 }
 
 // ───────────────────── Play Store Button ─────────────────────
-function PlayBadge({ orange = false, big = false }) {
+function PlayBadge({ orange = false, big = false, onOpen }) {
   return (
-    <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}
+    <button type="button" onClick={onOpen}
     className={"ps-btn" + (orange ? " is-orange" : "")}
     style={big ? { padding: "20px 32px 20px 26px" } : null}>
       <svg className="icon" viewBox="0 0 512 512" aria-hidden="true">
@@ -196,7 +196,7 @@ function PlayBadge({ orange = false, big = false }) {
         <small>BAIXE NA</small>
         <strong>Google Play</strong>
       </span>
-    </a>);
+    </button>);
 
 }
 
@@ -438,7 +438,7 @@ function trackWhatsAppClick() {
   }
 }
 
-function PrelaunchModal({ onClose }) {
+function PrelaunchModal({ onClose, onContinue }) {
   return (
     <div className="prelaunch-overlay" role="dialog" aria-modal="true" onClick={onClose}>
       <div className="prelaunch-card" onClick={(e) => e.stopPropagation()}>
@@ -446,11 +446,313 @@ function PrelaunchModal({ onClose }) {
         <div className="prelaunch-badge">🔥 VAGAS LIMITADAS · PRÉ-LANÇAMENTO</div>
         <h3>O app Labuu está chegando — e você pode entrar antes de todo mundo</h3>
         <p>Entre agora no grupo oficial de pré-lançamento no WhatsApp e garanta benefícios exclusivos, só pra quem chegar cedo.</p>
-        <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" className="prelaunch-cta" onClick={() => { trackWhatsAppClick(); onClose(); }}>
+        <button type="button" className="prelaunch-cta" onClick={onContinue}>
           👉 Entrar no grupo de pré-lançamento
-        </a>
+        </button>
       </div>
     </div>);
+
+}
+
+// ───────────────────── Autocomplete de cidades (IBGE) ─────────────────────
+let CITY_CACHE = null;
+async function loadCities() {
+  if (CITY_CACHE) return CITY_CACHE;
+  try {
+    const res = await fetch("/api/cidades");
+    CITY_CACHE = await res.json();
+  } catch (err) {
+    CITY_CACHE = [];
+  }
+  return CITY_CACHE;
+}
+const ACCENT_MAP = { á: "a", à: "a", â: "a", ã: "a", ä: "a", é: "e", è: "e", ê: "e", ë: "e", í: "i", ì: "i", î: "i", ï: "i", ó: "o", ò: "o", ô: "o", õ: "o", ö: "o", ú: "u", ù: "u", û: "u", ü: "u", ç: "c", ñ: "n" };
+function normalizeText(s) {
+  return s.toLowerCase().replace(/[áàâãäéèêëíìîïóòôõöúùûüçñ]/g, (ch) => ACCENT_MAP[ch] || ch);
+}
+
+function formatPhone(value) {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+const ESPECIALIDADE_OPTIONS = [
+"Ajudante de pintura",
+"Ajudante de pedreiro",
+"Ajudante de eletricista",
+"Ajudante de carpinteiro"];
+
+
+const DIFICULDADE_OPTIONS = [
+"Falta de indicação — pouca gente conhece meu trabalho",
+"Depender só de grupos de WhatsApp",
+"Poucos chamados, trabalho irregular",
+"Concorrência com quem já tem contato direto",
+"Não ter como mostrar meu histórico e avaliações"];
+
+
+function resolveSingle(value, outroText) {
+  return value === "Outros" ? `Outros: ${outroText.trim()}` : value;
+}
+
+// ───────────────────── Grupo de opções (escolha única) ─────────────────────
+function ChoiceGroup({ name, options, selected, onSelect, outroValue, onOutroChange }) {
+  return (
+    <>
+      <div className="cadastro-check-grid">
+        {options.map((opt) =>
+        <label key={opt} className={"cadastro-check" + (selected === opt ? " on" : "")}>
+            <input type="radio" name={name} checked={selected === opt} onChange={() => onSelect(opt)} />
+            {opt}
+          </label>
+        )}
+        <label className={"cadastro-check" + (selected === "Outros" ? " on" : "")}>
+          <input type="radio" name={name} checked={selected === "Outros"} onChange={() => onSelect("Outros")} />
+          Outros
+        </label>
+      </div>
+      {selected === "Outros" &&
+      <input type="text" className="cadastro-outro-input" value={outroValue}
+      onChange={(e) => onOutroChange(e.target.value)} placeholder="Escreva aqui..." />}
+    </>);
+
+}
+
+// ───────────────────── Cadastro modal ─────────────────────
+function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
+  const [form, setForm] = useState({
+    nome: "", telefone: "", interesse: "ajudante",
+    cidade: "", uf: "",
+    especialidade: "", especialidadeOutro: "",
+    dificuldade: "", dificuldadeOutro: ""
+  });
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  const [cityList, setCityList] = useState([]);
+  const [cityOpen, setCityOpen] = useState(false);
+
+  useEffect(() => { loadCities(); }, []);
+
+  function update(field, value) {
+    setForm((f) => ({ ...f, [field]: value }));
+  }
+
+  function handleCidadeChange(value) {
+    update("cidade", value);
+    update("uf", "");
+    if (!value.trim()) { setCityList([]); setCityOpen(false); return; }
+    const q = normalizeText(value);
+    loadCities().then((all) => {
+      const matches = all.filter((c) => normalizeText(c.nome).includes(q)).slice(0, 8);
+      setCityList(matches);
+      setCityOpen(matches.length > 0);
+    });
+  }
+
+  function selectCidade(c) {
+    update("cidade", c.nome);
+    update("uf", c.uf);
+    setCityList([]);
+    setCityOpen(false);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!form.nome.trim()) {
+      setError("Informe seu nome e sobrenome.");
+      return;
+    }
+    if (form.telefone.replace(/\D/g, "").length < 10) {
+      setError("Informe um número de celular válido.");
+      return;
+    }
+    if (!form.especialidade) {
+      setError("Selecione sua especialidade.");
+      return;
+    }
+    if (form.especialidade === "Outros" && !form.especialidadeOutro.trim()) {
+      setError("Escreva sua especialidade em \"Outros\".");
+      return;
+    }
+    if (!form.dificuldade) {
+      setError("Selecione sua maior dificuldade.");
+      return;
+    }
+    if (form.dificuldade === "Outros" && !form.dificuldadeOutro.trim()) {
+      setError("Escreva sua dificuldade em \"Outros\".");
+      return;
+    }
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: form.nome,
+          telefone: form.telefone,
+          interesse: form.interesse,
+          cidade: form.cidade,
+          uf: form.uf,
+          especialidade: resolveSingle(form.especialidade, form.especialidadeOutro),
+          dificuldade: resolveSingle(form.dificuldade, form.dificuldadeOutro)
+        })
+      });
+      if (!res.ok) throw new Error("bad status");
+
+      const event_id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
+      if (window.ttq) ttq.track("CompleteRegistration", {}, { event_id });
+
+      onSuccess();
+    } catch (err) {
+      setSending(false);
+      setError("Não deu pra enviar agora. Confere sua internet e tenta de novo.");
+    }
+  }
+
+  return (
+    <div className="prelaunch-overlay" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="cadastro-card" onClick={(e) => e.stopPropagation()}>
+        <button className="prelaunch-close" onClick={onClose} aria-label="Fechar">×</button>
+
+        {step === "success" ? (
+          <>
+            <div className="prelaunch-badge">✅ CADASTRO CONCLUÍDO</div>
+            <h3>Prontinho! Seu cadastro foi concluído.</h3>
+            <p>Agora entra na nossa comunidade exclusiva no WhatsApp e garanta benefícios exclusivos, só pra quem chegou cedo.</p>
+            <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" className="prelaunch-cta" onClick={() => { trackWhatsAppClick(); onClose(); }}>
+              👉 Entrar na comunidade exclusiva
+            </a>
+          </>
+        ) : step === "login" ? (
+          <LoginForm onSuccess={onSuccess} onSwitchStep={onSwitchStep} />
+        ) : (
+          <>
+            <div className="prelaunch-badge">🔥 VAGAS LIMITADAS · PRÉ-LANÇAMENTO</div>
+            <h3>Garanta seu lugar na Labuu</h3>
+            <p className="cadastro-lead">Preenche rapidinho pra gente te conhecer melhor — assim que o app abrir, seu cadastro já tá pronto.</p>
+            <form className="cadastro-form" onSubmit={handleSubmit}>
+              <label className="cadastro-label">
+                Nome e sobrenome
+                <input type="text" required autoComplete="name" value={form.nome}
+                  onChange={(e) => update("nome", e.target.value)} placeholder="Seu nome completo" />
+              </label>
+              <label className="cadastro-label">
+                Número de celular
+                <input type="tel" required autoComplete="tel" value={form.telefone}
+                  onChange={(e) => update("telefone", formatPhone(e.target.value))} placeholder="(11) 98765-4321" />
+              </label>
+
+              <div className="cadastro-label" style={{ marginBottom: 0 }}>Seu interesse é encontrar oportunidade de serviço como...</div>
+              <div className="cadastro-radio-row">
+                <label className={"cadastro-radio" + (form.interesse === "ajudante" ? " on" : "")}>
+                  <input type="radio" name="interesse" value="ajudante" checked={form.interesse === "ajudante"} onChange={() => update("interesse", "ajudante")} />
+                  Ajudante
+                </label>
+                <label className={"cadastro-radio" + (form.interesse === "contratante" ? " on" : "")}>
+                  <input type="radio" name="interesse" value="contratante" checked={form.interesse === "contratante"} onChange={() => update("interesse", "contratante")} />
+                  Contratante
+                </label>
+              </div>
+
+              <label className="cadastro-label" style={{ position: "relative" }}>
+                Qual cidade você atua?
+                <input type="text" required autoComplete="off" value={form.cidade}
+                  onChange={(e) => handleCidadeChange(e.target.value)}
+                  onFocus={() => cityList.length > 0 && setCityOpen(true)}
+                  onBlur={() => setTimeout(() => setCityOpen(false), 150)}
+                  placeholder="Ex: Guarulhos" />
+                {cityOpen &&
+                <div className="cadastro-suggest">
+                  {cityList.map((c, i) =>
+                  <button type="button" key={i} className="cadastro-suggest-item" onMouseDown={() => selectCidade(c)}>
+                      {c.nome} <span>· {c.uf}</span>
+                    </button>
+                  )}
+                </div>}
+              </label>
+
+              <div className="cadastro-label" style={{ marginBottom: 0 }}>Qual é sua especialidade?</div>
+              <ChoiceGroup name="especialidade" options={ESPECIALIDADE_OPTIONS} selected={form.especialidade}
+                onSelect={(v) => update("especialidade", v)}
+                outroValue={form.especialidadeOutro} onOutroChange={(v) => update("especialidadeOutro", v)} />
+
+              <div className="cadastro-label" style={{ marginBottom: 0 }}>Hoje, qual sua maior dificuldade pra conseguir serviço?</div>
+              <ChoiceGroup name="dificuldade" options={DIFICULDADE_OPTIONS} selected={form.dificuldade}
+                onSelect={(v) => update("dificuldade", v)}
+                outroValue={form.dificuldadeOutro} onOutroChange={(v) => update("dificuldadeOutro", v)} />
+
+              {error && <p className="cadastro-error">{error}</p>}
+
+              <button type="submit" className="prelaunch-cta" disabled={sending}>
+                {sending ? "Enviando..." : "Concluir cadastro"}
+              </button>
+              <p className="cadastro-note">Ao continuar, você concorda com o tratamento dos seus dados conforme a LGPD (Lei 13.709/2018) e nossa <a href="privacidade.html" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>. Seus dados ficam protegidos e são usados só pela Labuu.</p>
+              <button type="button" className="cadastro-switch" onClick={() => onSwitchStep("login")}>
+                Já tem cadastro? <b>Entrar</b>
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>);
+
+}
+
+// ───────────────────── Login form ─────────────────────
+function LoginForm({ onSuccess, onSwitchStep }) {
+  const [telefone, setTelefone] = useState("");
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ telefone })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        setError("Não encontramos esse número. Confere e tenta de novo.");
+        setSending(false);
+        return;
+      }
+      onSuccess();
+    } catch (err) {
+      setSending(false);
+      setError("Não deu pra entrar agora. Tenta de novo em instantes.");
+    }
+  }
+
+  return (
+    <>
+      <div className="prelaunch-badge">👋 BEM-VINDO DE VOLTA</div>
+      <h3>Entrar no seu cadastro</h3>
+      <p className="cadastro-lead">Já garantiu seu lugar? Confirma seu número de celular pra continuar.</p>
+      <form className="cadastro-form" onSubmit={handleLogin}>
+        <label className="cadastro-label">
+          Número de celular
+          <input type="tel" required autoComplete="tel" value={telefone}
+            onChange={(e) => setTelefone(formatPhone(e.target.value))} placeholder="(11) 98765-4321" />
+        </label>
+
+        {error && <p className="cadastro-error">{error}</p>}
+
+        <button type="submit" className="prelaunch-cta" disabled={sending}>
+          {sending ? "Entrando..." : "Entrar"}
+        </button>
+        <button type="button" className="cadastro-switch" onClick={() => onSwitchStep("form")}>
+          Ainda não se cadastrou? <b>Criar cadastro</b>
+        </button>
+      </form>
+    </>);
 
 }
 
@@ -458,8 +760,10 @@ function PrelaunchModal({ onClose }) {
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [audience, setAudience] = useState("ajudante");
-  const [showPrelaunch, setShowPrelaunch] = useState(false);
+  const [modalStep, setModalStep] = useState("closed"); // closed | intro | form | login | success
   const [scrolled, setScrolled] = useState(false);
+  const openCadastro = () => setModalStep("form");
+  const closeModal = () => setModalStep("closed");
 
   useEffect(() => {
     document.documentElement.dataset.theme = t.dark ? "dark" : "light";
@@ -475,7 +779,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowPrelaunch(true), 1200);
+    const timer = setTimeout(() => setModalStep((s) => s === "closed" ? "intro" : s), 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -484,7 +788,9 @@ function App() {
 
   return (
     <div data-screen-label="Labuu LP" data-audience={audience}>
-      {showPrelaunch && <PrelaunchModal onClose={() => setShowPrelaunch(false)} />}
+      {modalStep === "intro" && <PrelaunchModal onClose={closeModal} onContinue={openCadastro} />}
+      {(modalStep === "form" || modalStep === "login" || modalStep === "success") &&
+        <CadastroModal step={modalStep} onClose={closeModal} onSuccess={() => setModalStep("success")} onSwitchStep={setModalStep} />}
       {/* Nav */}
       <nav className="nav">
         <div className="wrap nav-inner">
@@ -496,9 +802,9 @@ function App() {
             <a href="#beneficios">Benefícios</a>
             <a href="#faq">Dúvidas</a>
           </div>
-          <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" className="nav-cta" onClick={trackWhatsAppClick}>
+          <button type="button" className="nav-cta" onClick={openCadastro}>
             Baixar app <span>→</span>
-          </a>
+          </button>
         </div>
       </nav>
 
@@ -517,7 +823,7 @@ function App() {
             <p className="sub">{c.sub}</p>
 
             <div className="hero-cta">
-              <PlayBadge orange big />
+              <PlayBadge orange big onOpen={openCadastro} />
               <div className="hero-micro">
                 <b>{c.micro[0]}</b><br />
                 {c.micro[1]}
@@ -708,7 +1014,7 @@ function App() {
             </div>
             <div className="footer-download">
               <div className="footer-eyebrow">Baixe agora · grátis</div>
-              <PlayBadge orange big />
+              <PlayBadge orange big onOpen={openCadastro} />
             </div>
           </div>
 
@@ -716,36 +1022,20 @@ function App() {
             <div className="footer-left">
               <span>© 2026 Labuu</span>
               <span className="sep">·</span>
-              <a href="#privacidade" onClick={(e) => e.preventDefault()}>Privacidade</a>
+              <a href="privacidade.html">Privacidade</a>
               <span className="sep">·</span>
-              <a href="#termos" onClick={(e) => e.preventDefault()}>Termos</a>
-              <span className="sep">·</span>
-              <a href="#suporte" onClick={(e) => e.preventDefault()}>Suporte</a>
-            </div>
-            <div className="footer-social">
-              <a href="https://instagram.com/labuuapp" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-                </svg>
-              </a>
-              <a href="https://facebook.com/labuuapp" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.14 8.44 9.94v-7.03H7.9v-2.91h2.54v-2.2c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.85h2.78l-.44 2.91h-2.34V22c4.78-.8 8.44-4.94 8.44-9.94z" />
-                </svg>
-              </a>
+              <a href="https://wa.me/551129378525" target="_blank" rel="noopener noreferrer">Suporte</a>
             </div>
           </div>
         </div>
       </footer>
 
       {/* Sticky CTA (mobile) */}
-      <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}
+      <button type="button" onClick={openCadastro}
       className={`sticky-cta ${scrolled ? "show" : ""}`}>
         <span>Baixar na Google Play</span>
         <span className="arrow">→</span>
-      </a>
+      </button>
 
       {/* Tweaks */}
       <TweaksPanel title="Tweaks · Labuu">
