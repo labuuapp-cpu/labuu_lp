@@ -11,9 +11,63 @@ const DATA_DIR = path.join(__dirname, "data");
 const LEADS_FILE = path.join(DATA_DIR, "leads.jsonl");
 const PIXEL_CODE = "D9LP76JC77U97D5Q1GBG";
 const ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 function normalizePhone(phone) {
   return (phone || "").replace(/\D/g, "");
+}
+
+function requireAdmin(req, res, next) {
+  if (!ADMIN_PASSWORD) {
+    res.status(503).send("Admin não configurado (defina ADMIN_PASSWORD).");
+    return;
+  }
+  const auth = req.headers.authorization || "";
+  const [scheme, encoded] = auth.split(" ");
+  const decoded = scheme === "Basic" && encoded ? Buffer.from(encoded, "base64").toString("utf8") : "";
+  const password = decoded.slice(decoded.indexOf(":") + 1);
+
+  const a = Buffer.from(password);
+  const b = Buffer.from(ADMIN_PASSWORD);
+  const match = a.length === b.length && crypto.timingSafeEqual(a, b);
+
+  if (!match) {
+    res.set("WWW-Authenticate", 'Basic realm="Labuu Admin"');
+    res.status(401).send("Autenticação necessária.");
+    return;
+  }
+  next();
+}
+
+function readLeads() {
+  let lines;
+  try {
+    lines = fs.readFileSync(LEADS_FILE, "utf8").split("\n").filter(Boolean);
+  } catch (err) {
+    return [];
+  }
+  const leads = [];
+  for (const line of lines) {
+    try {
+      leads.push(JSON.parse(line));
+    } catch (err) {
+      // skip malformed line
+    }
+  }
+  return leads.reverse();
+}
+
+function toCsv(leads) {
+  const columns = ["ts", "nome", "telefone", "interesse", "cidade", "uf", "especialidade", "dificuldade"];
+  function escapeCell(value) {
+    const s = value === undefined || value === null ? "" : String(value);
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  }
+  const rows = [columns.join(",")];
+  for (const lead of leads) {
+    rows.push(columns.map((c) => escapeCell(lead[c])).join(","));
+  }
+  return rows.join("\n");
 }
 
 let citiesCache = null;
@@ -165,6 +219,20 @@ app.get("/api/cidades", async (_req, res) => {
     console.error("Failed to fetch IBGE cities", err);
     res.status(502).json(citiesCache || []);
   }
+});
+
+app.get("/admin", requireAdmin, (_req, res) => {
+  res.sendFile(path.join(__dirname, "admin.html"));
+});
+
+app.get("/api/admin/leads", requireAdmin, (_req, res) => {
+  res.json(readLeads());
+});
+
+app.get("/api/admin/leads.csv", requireAdmin, (_req, res) => {
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", 'attachment; filename="leads.csv"');
+  res.send(toCsv(readLeads()));
 });
 
 app.get("/health", (_req, res) => res.json({ ok: true }));

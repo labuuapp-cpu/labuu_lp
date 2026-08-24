@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cadastros — Labuu Admin</title>
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#F5F2EC; --ink:#0D0D0D; --ink-2:#1f1f1f; --muted:#6b6258;
+    --rule:rgba(13,13,13,.12); --rule-2:rgba(13,13,13,.06);
+    --paper:#FFFCF6; --accent:#E47310; --accent-deep:#a85309; --accent-soft:rgba(228,115,16,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Space Grotesk", ui-sans-serif, system-ui, sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px clamp(20px,4vw,48px) 64px}
+
+  .admin-head{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .admin-head h1{margin:0;font-family:"Archivo Narrow",sans-serif;font-weight:800;font-size:clamp(24px,3vw,32px)}
+  .admin-sub{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+  .admin-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;border:1px solid var(--rule);
+    background:var(--paper);color:var(--ink);font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;
+    cursor:pointer;text-decoration:none;transition:border-color .15s ease}
+  .btn:hover{border-color:var(--accent)}
+  .btn.is-accent{background:var(--accent);color:#0D0D0D;border-color:var(--accent)}
+
+  .stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .stat{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 18px;min-width:140px}
+  .stat b{display:block;font-family:"Archivo Narrow",sans-serif;font-weight:800;font-size:24px}
+  .stat span{font-size:12px;color:var(--muted)}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:14px;background:var(--paper)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;white-space:nowrap}
+  thead th{position:sticky;top:0;background:var(--paper);text-align:left;padding:12px 14px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);
+    text-transform:uppercase;border-bottom:1px solid var(--rule)}
+  tbody td{padding:12px 14px;border-bottom:1px solid var(--rule-2);color:var(--ink-2)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:var(--accent-soft)}
+  .tag{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:700;
+    background:var(--accent-soft);color:var(--accent-deep)}
+
+  .empty, .error, .loading{padding:48px 20px;text-align:center;color:var(--muted);font-size:14px}
+  .error{color:#c0392b}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="admin-head">
+    <div>
+      <h1>Cadastros recebidos</h1>
+      <p class="admin-sub">Leads capturados pelo formulário de pré-lançamento da Labuu.</p>
+    </div>
+    <div class="admin-actions">
+      <button class="btn" id="refresh-btn">↻ Atualizar</button>
+      <a class="btn is-accent" href="/api/admin/leads.csv">⬇ Exportar CSV</a>
+    </div>
+  </div>
+
+  <div class="stat-row" id="stats"></div>
+
+  <div class="table-wrap">
+    <div id="content" class="loading">Carregando...</div>
+  </div>
+</div>
+
+<script>
+function esc(s) {
+  const d = document.createElement("div");
+  d.textContent = s == null ? "" : String(s);
+  return d.innerHTML;
+}
+
+function fmtDate(iso) {
+  try {
+    return new Date(iso).toLocaleString("pt-BR");
+  } catch (e) {
+    return iso || "";
+  }
+}
+
+async function load() {
+  const content = document.getElementById("content");
+  const stats = document.getElementById("stats");
+  content.className = "loading";
+  content.textContent = "Carregando...";
+
+  try {
+    const res = await fetch("/api/admin/leads");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const leads = await res.json();
+
+    const ajudantes = leads.filter((l) => l.interesse === "ajudante").length;
+    const contratantes = leads.filter((l) => l.interesse === "contratante").length;
+    stats.innerHTML =
+      '<div class="stat"><b>' + leads.length + '</b><span>Total de cadastros</span></div>' +
+      '<div class="stat"><b>' + ajudantes + '</b><span>Ajudantes</span></div>' +
+      '<div class="stat"><b>' + contratantes + '</b><span>Contratantes</span></div>';
+
+    if (leads.length === 0) {
+      content.className = "empty";
+      content.textContent = "Nenhum cadastro recebido ainda.";
+      return;
+    }
+
+    let html = "<table><thead><tr>" +
+      "<th>Data</th><th>Nome</th><th>Telefone</th><th>Interesse</th><th>Cidade</th><th>Especialidade</th><th>Dificuldade</th>" +
+      "</tr></thead><tbody>";
+    for (const l of leads) {
+      html += "<tr>" +
+        "<td>" + esc(fmtDate(l.ts)) + "</td>" +
+        "<td>" + esc(l.nome) + "</td>" +
+        "<td>" + esc(l.telefone) + "</td>" +
+        "<td><span class=\"tag\">" + esc(l.interesse) + "</span></td>" +
+        "<td>" + esc(l.cidade) + (l.uf ? " · " + esc(l.uf) : "") + "</td>" +
+        "<td>" + esc(l.especialidade) + "</td>" +
+        "<td>" + esc(l.dificuldade) + "</td>" +
+        "</tr>";
+    }
+    html += "</tbody></table>";
+    content.className = "";
+    content.innerHTML = html;
+  } catch (err) {
+    content.className = "error";
+    content.textContent = "Não foi possível carregar os cadastros. Tenta atualizar a página.";
+  }
+}
+
+document.getElementById("refresh-btn").addEventListener("click", load);
+load();
+</script>
+
+</body>
+</html>
