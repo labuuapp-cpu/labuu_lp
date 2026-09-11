@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Termos de Uso — Labuu</title>
+
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#F5F2EC;
+    --ink:#0D0D0D;
+    --ink-2:#1f1f1f;
+    --muted:#6b6258;
+    --rule:rgba(13,13,13,.12);
+    --rule-2:rgba(13,13,13,.06);
+    --paper:#FFFCF6;
+    --accent:#E47310;
+    --accent-deep:#a85309;
+    --accent-soft:rgba(228,115,16,.08);
+    --container:860px;
+    --pad-x:clamp(20px, 5vw, 64px);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:var(--accent);color:#fff}
+  img{max-width:100%;display:block}
+  a{color:var(--accent)}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--pad-x)}
+
+  .nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--rule-2)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px var(--pad-x);max-width:var(--container);margin:0 auto}
+  .logo-wordmark{height:26px;width:auto}
+  .nav-back{font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;color:var(--ink-2);
+    text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .nav-back:hover{color:var(--accent)}
+
+  .policy-hero{padding:56px 0 24px}
+  .policy-badge{display:inline-flex;align-items:center;gap:6px;font-family:"JetBrains Mono",monospace;
+    font-size:11.5px;letter-spacing:.1em;font-weight:700;color:#0D0D0D;background:var(--accent);
+    border-radius:999px;padding:6px 14px;margin-bottom:18px}
+  .policy-hero h1{margin:0 0 16px;font-family:"Archivo Narrow",sans-serif;font-weight:800;
+    font-size:clamp(30px, 4.4vw, 44px);line-height:1.1;letter-spacing:-.015em}
+  .policy-hero p{margin:0 0 8px;font-size:16px;line-height:1.6;color:var(--muted);max-width:62ch}
+  .policy-hero .policy-updated{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--muted)}
+
+  .policy-sections{padding:16px 0 80px}
+  .policy-section{padding:32px 0;border-top:1px solid var(--rule)}
+  .policy-num{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--accent-deep);font-weight:700}
+  .policy-section h2{margin:8px 0 14px;font-family:"Archivo",sans-serif;font-weight:800;font-size:21px;color:var(--ink)}
+  .policy-section h3{margin:22px 0 8px;font-family:"Archivo",sans-serif;font-weight:700;font-size:15.5px;color:var(--ink)}
+  .policy-section p{margin:0 0 12px;font-size:15px;line-height:1.65;color:var(--ink-2)}
+  .policy-section ul{margin:0 0 12px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .policy-section ul li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--ink-2)}
+  .policy-section ul li::before{content:"→";font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--accent);flex:none}
+  .policy-section table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14px}
+  .policy-section table th,.policy-section table td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+  .policy-section table th{font-family:"Archivo",sans-serif;font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .policy-section table td{color:var(--ink-2)}
+
+  .policy-contact{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:24px 28px;margin-top:8px}
+  .policy-contact strong{display:block;font-family:"Archivo",sans-serif;font-size:16px;margin-bottom:8px;color:var(--ink)}
+  .policy-contact a{display:block;font-size:14.5px;color:var(--ink-2);text-decoration:none;margin-bottom:4px}
+  .policy-contact a:hover{color:var(--accent)}
+
+  .site-footer{border-top:1px solid var(--rule-2);padding:28px 0;background:var(--bg)}
+  .footer-bottom{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;
+    font-family:"Archivo",sans-serif;font-size:13px;color:var(--muted)}
+  .footer-bottom a{color:var(--muted);text-decoration:none}
+  .footer-bottom a:hover{color:var(--accent)}
+  .sep{opacity:.5}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" aria-label="Labuu — início">
+      <img class="logo-wordmark" src="assets/labuu-wordmark-orange.png" alt="Labuu" />
+    </a>
+    <a class="nav-back" href="index.html">← Voltar pro site</a>
+  </div>
+</nav>
+
+<header class="policy-hero">
+  <div class="wrap">
+    <div class="policy-badge">CONTRATO · USO DA PLATAFORMA</div>
+    <h1>Termos de Uso</h1>
+    <p>LABUU Tecnologia e Intermediação de Serviços Ltda — CNPJ 67.018.787/0001-90 — sede em Guarulhos/SP. Ao usar o aplicativo ou o site da Labuu, você concorda integralmente com estes Termos.</p>
+    <p class="policy-updated">Última atualização: 21 de julho de 2026</p>
+  </div>
+</header>
+
+<main class="policy-sections">
+  <div class="wrap">
+
+    <section class="policy-section">
+      <div class="policy-num">01</div>
+      <h2>Definições</h2>
+      <ul>
+        <li><b>Ajudante:</b>&nbsp;pessoa física autônoma/MEI que oferece trabalho físico pontual.</li>
+        <li><b>Solicitante:</b>&nbsp;pessoa física ou jurídica que contrata Ajudantes.</li>
+        <li><b>Diária:</b>&nbsp;serviço pontual contratado entre Ajudante e Solicitante.</li>
+        <li><b>LABUU:</b>&nbsp;plataforma digital que conecta as partes.</li>
+        <li><b>Taxa:</b>&nbsp;cobrada pela LABUU quando a Diária é concluída com sucesso.</li>
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">02</div>
+      <h2>Objeto</h2>
+      <p>2.1. A LABUU conecta Ajudantes com Solicitantes de forma bilateral.</p>
+      <p>2.2. A LABUU não é empregadora de Ajudantes. Cada Diária é contrato direto entre Ajudante e Solicitante.</p>
+      <p>2.3. Cada Diária envolve: o Ajudante executa o trabalho conforme instruído pelo Solicitante; o Solicitante contrata e instrui o trabalho; a LABUU conecta, processa pagamento e medeia disputas administrativamente, sem ingerência sobre o modo de execução.</p>
+      <p>2.4. A relação entre Ajudante e Solicitante é de natureza civil e autônoma, nos termos do art. 442-B da CLT (Lei 13.467/2017). A LABUU atua exclusivamente como intermediária tecnológica: não define horários, não determina o modo ou o local de execução do trabalho além do informado pelo Solicitante, não exerce poder diretivo, disciplinar ou fiscalizador sobre a prestação do serviço, e não impõe exclusividade operacional durante a vigência da Diária. A ausência desses elementos é o que sustenta a natureza autônoma do vínculo, nos termos da jurisprudência aplicável ao Tema 1.291 de Repercussão Geral do STF.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">03</div>
+      <h2>Aceitação</h2>
+      <p>Ao clicar em "Aceitar", você concorda com todos estes Termos integralmente. Se discordar de qualquer cláusula, não poderá usar a Plataforma.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">04</div>
+      <h2>Autonomia</h2>
+      <p>4.1. O Ajudante é autônomo ou MEI, sem vínculo empregatício com a LABUU ou com o Solicitante.</p>
+      <p>4.2. O Ajudante pode recusar Diárias livremente, trabalhar em outras plataformas simultaneamente e escolher seus horários, sem exclusividade com a LABUU.</p>
+      <p>4.3. A recusa de Diárias pelo Ajudante não gera penalização, redução de visibilidade no aplicativo, nem qualquer efeito sobre sua posição de exibição a Solicitantes. Cada Diária é contrato independente e pontual. Fundamento legal: art. 442-B da CLT.</p>
+      <p>4.4. <b>Exclusividade pós-Diária.</b> Fica vedado ao Ajudante e ao Solicitante estabelecerem, entre si, contratação direta sem intermediação da LABUU decorrente de conexão originada pela Plataforma, pelo prazo de 6 (seis) meses contados da data da última Diária concluída entre as partes. O descumprimento sujeita a parte infratora ao pagamento de multa correspondente a 30% (trinta por cento) do valor total das Diárias realizadas entre as partes nos 90 (noventa) dias anteriores à contratação direta identificada, sem prejuízo de perdas e danos comprovados e da possibilidade de suspensão do acesso à Plataforma. Esta cláusula não restringe a autonomia do Ajudante de atuar livremente em outras plataformas ou com outros Solicitantes não vinculados a ela — aplica-se exclusivamente à desintermediação de uma conexão já originada pela LABUU.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">05</div>
+      <h2>Cadastro</h2>
+      <p>5.1. O Ajudante deve fornecer dados pessoais verídicos (nome, CPF, data de nascimento, endereço), telefone, e-mail, dados bancários para recebimento, e comprovação de formalização como autônomo/MEI. A LABUU se reserva o direito de solicitar documentação adicional e recusar cadastro sem justificativa.</p>
+      <p>5.2. O Solicitante deve fornecer dados pessoais/corporativos verídicos, telefone, e-mail, dados de pagamento válidos e endereço onde será realizado o trabalho.</p>
+      <p>5.3. O envio de documentos falsos, adulterados ou pertencentes a terceiros poderá resultar em bloqueio definitivo da conta, sem prejuízo das medidas legais cabíveis.</p>
+      <p>5.4. <b>Verificação de cadastro.</b> O cadastro do Ajudante está sujeito a verificações de segurança, incluindo consulta a bases públicas e, quando aplicável, serviços de background check, sem prejuízo do disposto na Cláusula 5.1. Em caso de reprovação, a LABUU comunicará o Ajudante por e-mail e/ou aplicativo, indicando os motivos quando possível e orientando sobre eventual novo envio de documentação.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">06</div>
+      <h2>Planos</h2>
+      <p><b>Ajudante:</b> Plano Gratuito (R$ 0/mês) ou Plano Pago (R$ 45/mês), este último com prioridade de exibição nas buscas do Solicitante.</p>
+      <p><b>Solicitante — Plano Gratuito</b> (R$ 0/mês): taxa fixa de 20% sobre o valor de cada Diária, qualquer que seja o Ajudante contratado.</p>
+      <p><b>Solicitante — Plano Premium</b> (R$ 69,90/mês): taxa regressiva por reutilização do mesmo Ajudante.</p>
+      <table>
+        <thead><tr><th>Diária com o mesmo Ajudante</th><th>Taxa</th></tr></thead>
+        <tbody>
+          <tr><td>1ª Diária</td><td>19%</td></tr>
+          <tr><td>2ª Diária</td><td>13%</td></tr>
+          <tr><td>3ª Diária</td><td>8%</td></tr>
+          <tr><td>4ª Diária em diante</td><td>4% (fixo)</td></tr>
+        </tbody>
+      </table>
+      <p>A contagem é feita por par Solicitante-Ajudante: sempre que o Solicitante contratar um Ajudante com quem nunca trabalhou antes, a contagem reinicia em 20% e segue a mesma progressão.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">07</div>
+      <h2>Pagamento</h2>
+      <p>7.1. O Solicitante deposita crédito antecipadamente (Pix ou Cartão).</p>
+      <p>7.2. Ao contratar o Ajudante, o crédito é bloqueado (não debitado).</p>
+      <p>7.3. Ao concluir: Ajudante e Solicitante comunicam "Trabalho concluído" via app; se nenhum comunicar, presume-se sucesso após 4 horas.</p>
+      <p>7.4. Após confirmação: o crédito é debitado, o Ajudante recebe em até 24h via Pix/TED, sem desconto de taxa de transferência.</p>
+      <p>7.5. Taxa LABUU: será cobrada do contratante apenas se a Diária for concluída com sucesso.</p>
+      <p>7.6. Crédito não utilizado é válido por 90 dias, com opção de saque sem taxa até 24h antes da expiração.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">08</div>
+      <h2>Reputação</h2>
+      <p>8.1. Após cada Diária, ambas as partes podem avaliar de 1 a 5 estrelas, com base em pontualidade, profissionalismo, comprometimento e responsabilidade.</p>
+      <p>8.2. A reputação tem finalidade exclusivamente informativa, permitindo que outros usuários decidam se contratam ou não. A nota não gera, por si só, qualquer ação automática da plataforma sobre a conta do usuário (bloqueio, suspensão ou penalidade).</p>
+      <p>8.3. Ambas as partes têm 48 horas para avaliar; se não avaliarem, recebem 5 estrelas automaticamente.</p>
+      <p>8.4. Reputação consistentemente baixa (média inferior a 2,0 em pelo menos 5 avaliações) gera alerta interno para revisão humana da equipe de compliance da LABUU, que poderá contatar o Ajudante ou o Solicitante antes de qualquer medida. Suspensões são tratadas exclusivamente nas Cláusulas 12 e 13, mediante apuração documentada — nunca de forma automática por nota.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">09</div>
+      <h2>Responsabilidades</h2>
+      <p><b>Ajudante:</b> executar o trabalho conforme descrito pelo Solicitante, estar no local no horário combinado, comunicar início e término via app, manter qualidade mínima aceitável.</p>
+      <p><b>Solicitante:</b> descrever claramente o trabalho, indicar endereço correto, supervisionar a execução do serviço contratado, comunicar início e término via app, manter ambiente minimamente seguro, pagar conforme acordado.</p>
+      <p><b>LABUU:</b> manter a plataforma funcionando, processar pagamentos corretamente, mediar disputas administrativamente, proteger dados pessoais conforme a LGPD.</p>
+      <p>9.4. <b>Termo de Responsabilidade do Ajudante.</b> Antes do início de cada Diária, o Ajudante deverá aceitar digitalmente, no aplicativo, o "Termo de Responsabilidade do Ajudante", declarando: (i) estar apto fisicamente para a execução do serviço; (ii) ter ciência dos riscos inerentes ao trabalho físico em ambiente de obra; (iii) comprometer-se a adotar condutas seguras e observar as instruções de segurança fornecidas pelo Solicitante; e (iv) isentar a LABUU de responsabilidade por acidentes decorrentes de imprudência, negligência ou inobservância das instruções de segurança do Solicitante. Este Termo não afasta a obrigação do Solicitante de manter ambiente minimamente seguro, prevista nesta Cláusula.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">10</div>
+      <h2>Geolocalização</h2>
+      <p>10.1. O GPS é usado antes do aceite, para que o Solicitante encontre Ajudantes próximos.</p>
+      <p>10.2. Após aceitar a Diária, início e término são comunicados via app por ambas as partes; a localização em tempo real não é solicitada nessa etapa.</p>
+      <p>10.3. Se ambos não comunicarem em 4 horas, presume-se sucesso.</p>
+      <p>10.4. A LABUU não rastreia o Ajudante durante a execução do trabalho. Apenas os comunicados via app são registrados. A geolocalização não é utilizada para controle de jornada, fiscalização de produtividade ou criação de subordinação.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">11</div>
+      <h2>Dados Pessoais (LGPD)</h2>
+      <p>11.1. <b>Encarregado de Dados (DPO):</b> Guilherme Queiroz — contato: <a href="mailto:labuu@labuu.com.br">labuu@labuu.com.br</a> — responsável pelo atendimento de titulares e pela comunicação com a Autoridade Nacional de Proteção de Dados (ANPD), nos termos do art. 41 da Lei 13.709/2018.</p>
+      <p>11.2. Dados coletados e base legal:</p>
+      <ul>
+        <li>Dados cadastrais (nome, CPF, telefone, e-mail): execução de contrato (art. 7º, V, LGPD).</li>
+        <li>Dados bancários: execução de contrato, uso restrito ao processamento de pagamentos.</li>
+        <li>Histórico de Diárias e avaliações: legítimo interesse (art. 7º, IX), para segurança e funcionamento do marketplace.</li>
+        <li>Localização geral (GPS pré-aceite): execução de contrato, coleta limitada ao momento da busca, sem rastreamento contínuo.</li>
+      </ul>
+      <p>11.3. Retenção: dados de cadastro são mantidos enquanto a conta estiver ativa e por até 5 (cinco) anos após a exclusão, para cumprimento de obrigação legal e exercício regular de direitos (art. 16, LGPD). Dados bancários seguem prazo de guarda fiscal aplicável.</p>
+      <p>11.4. A LABUU não vende dados a terceiros. Eventual compartilhamento com processadores de pagamento e provedores de infraestrutura ocorre mediante contrato que assegure os mesmos padrões de proteção desta cláusula, incluindo, se aplicável, cláusulas contratuais para transferência internacional de dados (art. 33, LGPD).</p>
+      <p>11.5. Em caso de incidente de segurança que possa acarretar risco relevante aos titulares, a LABUU comunicará a ANPD e os titulares afetados em prazo razoável, conforme art. 48 da LGPD.</p>
+      <p>11.6. O usuário pode, a qualquer momento, solicitar acesso, correção, portabilidade ou exclusão de seus dados, e revogar consentimento, mediante contato com o Encarregado.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">12</div>
+      <h2>Cancelamento</h2>
+      <p>12.1. Antes do aceite: crédito devolvido em até 48h, sem penalidade.</p>
+      <p>12.2. Após o aceite: até 24h antes, crédito devolvido sem penalidade; entre 2h e 24h antes, crédito devolvido com registro de -1 na reputação; menos de 2h antes, o Ajudante recebe 50% do valor e registro de -2.</p>
+      <p>12.3. Padrão de cancelamentos (3 ou mais em 30 dias) é encaminhado para revisão humana da equipe de compliance, que avaliará o histórico antes de eventual suspensão de 7 dias — garantido o direito de manifestação prévia do usuário.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">13</div>
+      <h2>Não-comparecimento</h2>
+      <p>13.1. Se o Ajudante não comparece: o Solicitante abre ocorrência, o crédito é devolvido, a reputação do Ajudante recebe -1. Padrão (3+ em 30 dias) segue o mesmo rito de revisão humana da Cláusula 12.3.</p>
+      <p>13.2. Se o Solicitante não comparece: o Ajudante abre ocorrência; o Solicitante tem 24h para responder; se não responder, presume-se culpa e o Ajudante recebe 100% do valor; a reputação do Solicitante recebe -1 ou -2 conforme o caso.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">14</div>
+      <h2>Disputas</h2>
+      <p>14.1. Em caso de discordância, o usuário abre disputa na plataforma. Ambas as partes têm 24h para se manifestar. A equipe de compliance da LABUU analisa em até 72h e emite recomendação técnica de solução, buscando a resolução amigável entre as partes.</p>
+      <p>14.2. A recomendação da LABUU não afasta o direito de qualquer das partes de buscar as vias judiciais ou os meios extrajudiciais de solução de conflitos cabíveis. Cabe recurso interno em até 10 dias.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">15</div>
+      <h2>Limitação de Responsabilidade</h2>
+      <p>A LABUU não é responsável por qualidade do trabalho do Ajudante, segurança no local de trabalho, danos a bens ou pessoas, comportamento de usuários, atrasos bancários, infrações legais cometidas por Ajudante ou Solicitante, ou eventos de força maior.</p>
+      <p>Esta limitação aplica-se a pleitos de natureza civil/indenizatória. Ela não produz efeito sobre eventual reconhecimento de vínculo empregatício ou verbas trabalhistas decorrentes de lei, que são de ordem pública e não podem ser afastadas por cláusula contratual.</p>
+      <p>Em caso de condenação em matéria cível, a indenização é limitada ao valor da taxa (máx. 4% da Diária), exceto se a LABUU tiver agido com dolo, fraude ou violação de lei.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">16</div>
+      <h2>Descadastramento</h2>
+      <p>A LABUU pode descadastrar usuário por fraude comprovada, violação de lei, padrão abusivo reiterado (com avisos prévios) ou divulgação de dados confidenciais.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">17</div>
+      <h2>Propriedade Intelectual</h2>
+      <p>Todos os direitos relacionados ao aplicativo, à marca LABUU, códigos, sistemas, layouts, funcionalidades e conteúdos pertencem exclusivamente à LABUU ou a seus licenciadores. É proibida a reprodução, cópia, engenharia reversa ou exploração comercial não autorizada.</p>
+      <p>17.2. <b>Uso de logomarca do Solicitante.</b> Ao aceitar estes Termos, o Solicitante autoriza a LABUU a exibir sua razão social e/ou logomarca em materiais institucionais, website e mídias da LABUU, exclusivamente para fins de demonstração de utilização da Plataforma (prova social). O Solicitante pode revogar esta autorização a qualquer momento mediante contato com <a href="mailto:suporte@labuu.app">suporte@labuu.app</a>.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">18</div>
+      <h2>Lei e Foro</h2>
+      <p>18.1. Estes Termos são regidos pela lei brasileira.</p>
+      <p>18.2. Aplicável, no que couber: Código Civil; Lei 13.467/2017 (Reforma Trabalhista, art. 442-B); Lei 13.709/2018 (LGPD); Lei 8.078/1990 (CDC).</p>
+      <p>18.3. Foro: comarca de domicílio do usuário, respeitados os direitos garantidos aos consumidores quando aplicáveis.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">19</div>
+      <h2>Alterações</h2>
+      <p>A LABUU pode alterar estes Termos a qualquer momento. A continuidade de uso da Plataforma após a alteração equivale a aceite.</p>
+    </section>
+
+    <section class="policy-section">
+      <div class="policy-num">20</div>
+      <h2>Aceite final</h2>
+      <p>Ao clicar em "Aceitar", você confirma que leu estes Termos, compreendeu as obrigações e riscos, reconhece ser autônomo/independente, concorda em usar a plataforma respeitando as leis aplicáveis, e autoriza o tratamento de dados nos termos da Cláusula 11.</p>
+      <p style="font-weight:700;color:var(--ink)">Eu li e aceito os termos e condições de uso, as políticas de privacidade, políticas de cookies e sou maior de 18 anos.</p>
+      <div class="policy-contact">
+        <strong>Labuu</strong>
+        <a href="mailto:suporte@labuu.com.br">suporte@labuu.com.br</a>
+        <a href="https://www.labuu.com.br" target="_blank" rel="noopener noreferrer">www.labuu.com.br</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    <span>© 2026 Labuu</span>
+    <span><a href="index.html">Voltar pro site</a><span class="sep"> · </span><a href="privacidade.html">Privacidade</a><span class="sep"> · </span><a href="mailto:suporte@labuu.com.br">Falar com a Labuu</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
