@@ -275,6 +275,9 @@ function BrandBlock({ audience }) {
 
 // ───────────────────── Phone mockup (per audience) ─────────────────────
 function PhoneMockup({ audience }) {
+  const [tab, setTab] = useState("inicio");
+  const [loggedIn, setLoggedIn] = useState(false);
+
   if (audience === "contratante") {
     return (
       <div className="hero-vis" aria-hidden="true">
@@ -286,69 +289,182 @@ function PhoneMockup({ audience }) {
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z" /></svg>
             </span>
           </div>
-          <div className="app-head">
-            <div className="greet">Olá, Marcos</div>
-            <div className="h">4 perfis <em>pra sua obra</em></div>
-          </div>
-          <div className="app-tabs">
-            <div className="app-tab on">Disponíveis</div>
-            <div className="app-tab">Favoritos</div>
-            <div className="app-tab">Histórico</div>
-          </div>
-          <div className="app-feed">
-            <div className="app-job new">
-              <div className="tag-new">4.9★</div>
-              <div className="badge">CA</div>
-              <div className="meta">
-                <span className="role">Cícero · Servente · 32 obras</span>
-                <span className="loc">Recife · PE · 1,8 km</span>
-              </div>
-              <div className="val">contratar<small>→</small></div>
+          {!loggedIn &&
+          <div className="app-login" style={{ backgroundImage: "url(assets/app-login-screen-cropped.png)" }}>
+            <div className="app-login-submit" onClick={() => { setLoggedIn(true); setTab("inicio"); }}></div>
+          </div>}
+          {loggedIn && <>
+          {tab !== "menu" &&
+          <div className="app-topbar">
+            <img className="app-topbar-avatar" src="assets/avatar-contratante-topbar-avatar.webp" alt="" />
+            <strong>Contratante</strong>
+            <div className="app-topbar-icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4v6h6M20 20v-6h-6" /><path d="M20 10a8 8 0 0 0-14.9-3M4 14a8 8 0 0 0 14.9 3" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8a6 6 0 1 0-12 0c0 5-2 6-2 8h16c0-2-2-3-2-8z" /><path d="M10 20a2 2 0 0 0 4 0" /></svg>
             </div>
-            <div className="app-job">
-              <div className="badge alt">JR</div>
-              <div className="meta">
-                <span className="role">Joelson · Carregador · 18 obras</span>
-                <span className="loc">Salvador · BA · 3,2 km</span>
-              </div>
-              <div className="val">4.7★<small>avaliação</small></div>
+          </div>}
+          {tab === "inicio" &&
+          <>
+            <div className="app-real-head">
+              <div className="h">Bom dia, Marcos!</div>
             </div>
-            <div className="app-job">
-              <div className="badge">WD</div>
-              <div className="meta">
-                <span className="role">Wesley · Demolição · 24 obras</span>
-                <span className="loc">BH · MG · 4,1 km</span>
+            <div className="app-feed">
+              <div className="app-notice-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z" /><path d="M12 8v4M12 15h.01" /></svg>
+                <strong>Verifique sua identidade</strong>
+                <p>Confirme seus dados e ganhe o selo de verificação.</p>
+                <div className="app-notice-cta">Verificar agora</div>
               </div>
-              <div className="val">4.8★<small>avaliação</small></div>
+              <div className="app-notice-card danger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#c0392b" strokeWidth="2"><path d="M12 4 3 20h18z" /><path d="M12 10v4M12 17h.01" /></svg>
+                <strong>Ajudante atrasado há mais de 30 minutos</strong>
+                <p>Ninguém fez check-in em Sua Casa ainda. Se ele não aparecer, fale com o suporte pra solicitar outro ajudante.</p>
+                <div className="app-notice-cta danger">Falar com o suporte</div>
+              </div>
+              <div className="app-notice-card plain">
+                <strong>Seus pedidos</strong>
+                <p>1 aguardando candidatos · 7 com propostas recebidas.</p>
+                <div className="app-notice-cta" onClick={() => setTab("painel")}>Visualizar pedidos</div>
+              </div>
             </div>
-          </div>
+          </>}
+          {tab === "painel" &&
+          <>
+            <div className="app-real-head">
+              <div className="h">Meu painel</div>
+              <div className="sub">Acompanhe candidaturas dos ajudantes em Guarulhos.</div>
+            </div>
+            <div className="app-feed">
+              <div className="app-cta-banner">+ Novo pedido</div>
+              <div className="app-tabs">
+                <div className="app-tab on">Publicados 1</div>
+                <div className="app-tab">Respondidos</div>
+                <div className="app-tab">Em andamento</div>
+              </div>
+              <div className="app-job-real">
+                <strong className="jr-title">Ajudante de Obra</strong>
+                <div className="jr-status">Recebendo candidatos</div>
+                <div className="jr-loc">Avenida Salgado Filho · Vila Rio, Guarulhos</div>
+                <div className="jr-time">10/09/2026 · 09:30–14:00 (+5 outras)</div>
+                <div className="jr-bottom">
+                  <div className="jr-cta ghost">Editar</div>
+                  <div className="jr-cta ghost warn">Excluir</div>
+                </div>
+                <div className="jr-views">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>
+                  14 ajudantes visualizando
+                </div>
+              </div>
+            </div>
+          </>}
+          {tab === "conversas" &&
+          <>
+            <div className="app-real-head">
+              <div className="h">Conversas</div>
+              <div className="sub">Fale direto com ajudantes e o suporte.</div>
+            </div>
+            <div className="app-feed">
+              <div className="app-chat">
+                <img className="badge-photo" src="assets/avatar-chat-avatar-contratante-cicero.webp" alt="" />
+                <div className="meta"><span className="role">Cícero</span><span className="loc">Chego às 8h, pode confirmar o endereço?</span></div>
+                <small>09:02</small>
+              </div>
+              <div className="app-chat">
+                <img className="badge-photo" src="assets/support-agent.jpeg" alt="" />
+                <div className="meta"><span className="role">Suporte Labuu</span><span className="loc">Seu pedido foi publicado com sucesso ✅</span></div>
+                <small>Ontem</small>
+              </div>
+              <div className="app-chat">
+                <img className="badge-photo" src="assets/avatar-chat-avatar-contratante-1.webp" alt="" />
+                <div className="meta"><span className="role">Felipe Silva de Souza</span><span className="loc">Cheguei mais cedo, já pode conferir o serviço.</span></div>
+                <small>Ontem</small>
+              </div>
+            </div>
+          </>}
+          {tab === "ajudantes" &&
+          <>
+            <div className="app-real-head">
+              <div className="h">👥 Ajudantes</div>
+              <div className="sub">Veja quem já trabalhou com você e monte sua lista de favoritos.</div>
+            </div>
+            <div className="app-tabs">
+              <div className="app-tab on">Já trabalhou com você</div>
+              <div className="app-tab">Favoritos</div>
+            </div>
+            <div className="app-feed">
+              <div className="app-helper-row">
+                <div className="app-helper-avatar letter">L<span></span></div>
+                <div className="meta"><span className="role">Luigi</span><span className="loc">☆ Sem avaliação</span></div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" /></svg>
+              </div>
+              <div className="app-helper-row">
+                <img className="app-helper-avatar" src="assets/avatar-helper-avatar-felipe.webp" alt="" /><span className="app-helper-dot"></span>
+                <div className="meta"><span className="role">Felipe Silva de Souza</span><span className="loc">☆ Sem avaliação</span></div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" /></svg>
+              </div>
+            </div>
+          </>}
+          {tab === "menu" &&
+          <div className="app-menu-body">
+            <div className="app-menu-header">
+              <img className="app-menu-avatar" src="assets/avatar-contratante-menu-avatar.webp" alt="" />
+              <div className="app-menu-who">
+                <strong>Contratante</strong>
+                <small>Contratante</small>
+              </div>
+              <div className="app-menu-icons">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4v6h6M20 20v-6h-6" /><path d="M20 10a8 8 0 0 0-14.9-3M4 14a8 8 0 0 0 14.9 3" /></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8a6 6 0 1 0-12 0c0 5-2 6-2 8h16c0-2-2-3-2-8z" /><path d="M10 20a2 2 0 0 0 4 0" /></svg>
+              </div>
+            </div>
+            <div className="app-menu-statcard">
+              <div className="app-menu-stat"><strong>8</strong><small>Pedidos<br />publicados</small></div>
+              <div className="app-menu-stat"><strong>23</strong><small>Ajudantes<br />contratados</small></div>
+              <div className="app-menu-stat"><strong>4.8</strong><small>Avaliação<br />média</small></div>
+            </div>
+            <div className="app-menu-cta">Meu desempenho</div>
+            <div className="app-menu-scroll">
+              <div className="app-menu-list">
+                <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" /></svg><span>Perfil</span><small>›</small></div>
+                <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M3 10h18" /></svg><span>Dados de pagamento</span><small>›</small></div>
+                <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 4 3 20h18z" /><path d="M12 10v4M12 17h.01" /></svg><span>Ocorrências</span><small>›</small></div>
+                <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="7" cy="7" r="2.4" /><circle cx="17" cy="5" r="2.2" /><circle cx="17" cy="19" r="2.2" /><path d="M9 8.4 15 5.6M9 9.6l6 8" /></svg><span>Convidar amigos</span><small>›</small></div>
+              </div>
+            </div>
+          </div>}
           <div className="app-nav">
-            <div className="app-nav-item on">
+            <div className={"app-nav-item" + (tab === "inicio" ? " on" : "")} onClick={() => setTab("inicio")}>
               <div className="app-nav-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 4 9v12h5v-7h6v7h5V9z" /></svg>
               </div>
-              Obras
+              Início
             </div>
-            <div className="app-nav-item">
+            <div className={"app-nav-item" + (tab === "painel" ? " on" : "")} onClick={() => setTab("painel")}>
+              <div className="app-nav-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4zm9 0h7v7h-7zm-9 9h7v7H4zm9 0h7v7h-7z" /></svg>
+              </div>
+              Painel
+            </div>
+            <div className={"app-nav-item" + (tab === "conversas" ? " on" : "")} onClick={() => setTab("conversas")}>
+              <div className="app-nav-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z" /></svg>
+              </div>
+              Conversas
+            </div>
+            <div className={"app-nav-item" + (tab === "ajudantes" ? " on" : "")} onClick={() => setTab("ajudantes")}>
               <div className="app-nav-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3 0-8 1.5-8 4.5V21h16v-2.5c0-3-5-4.5-8-4.5z" /></svg>
               </div>
               Ajudantes
             </div>
-            <div className="app-nav-item">
+            <div className={"app-nav-item" + (tab === "menu" ? " on" : "")} onClick={() => setTab("menu")}>
               <div className="app-nav-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z" /></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
               </div>
-              Chat
+              Menu
             </div>
           </div>
-        </div>
-        <div className="float-card">
-          <div className="ico">✓</div>
-          <div className="meta">
-            <strong>Reforço confirmado</strong>
-            <small>Quinta · R$ 180/dia</small>
-          </div>
+          </>}
         </div>
       </div>);
 
@@ -365,69 +481,263 @@ function PhoneMockup({ audience }) {
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z" /></svg>
           </span>
         </div>
-        <div className="app-head">
-          <div className="greet">Olá, Cícero</div>
-          <div className="h">3 chamados <em>perto de você</em></div>
-        </div>
-        <div className="app-tabs">
-          <div className="app-tab on">Pra você</div>
-          <div className="app-tab">Recentes</div>
-          <div className="app-tab">Histórico</div>
-        </div>
-        <div className="app-feed">
-          <div className="app-job new">
-            <div className="tag-new">NOVO</div>
-            <div className="badge">OB</div>
-            <div className="meta">
-              <span className="role">Servente · Obra residencial</span>
-              <span className="loc">Recife · PE · 2,4 km</span>
-            </div>
-            <div className="val">R$ 180<small>/dia</small></div>
+        {!loggedIn &&
+        <div className="app-login" style={{ backgroundImage: "url(assets/app-login-screen-cropped.png)" }}>
+          <div className="app-login-submit" onClick={() => { setLoggedIn(true); setTab("inicio"); }}></div>
+        </div>}
+        {loggedIn && <>
+        {tab !== "menu" &&
+        <div className="app-topbar">
+          <img className="app-topbar-avatar" src="https://i.pravatar.cc/64?img=52" alt="" />
+          <strong>Ajudante</strong>
+          <div className="app-topbar-icons">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4v6h6M20 20v-6h-6" /><path d="M20 10a8 8 0 0 0-14.9-3M4 14a8 8 0 0 0 14.9 3" /></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8a6 6 0 1 0-12 0c0 5-2 6-2 8h16c0-2-2-3-2-8z" /><path d="M10 20a2 2 0 0 0 4 0" /></svg>
           </div>
-          <div className="app-job">
-            <div className="badge alt">DM</div>
-            <div className="meta">
-              <span className="role">Demolição · Parede interna</span>
-              <span className="loc">Salvador · BA · 5,1 km</span>
-            </div>
-            <div className="val">R$ 220<small>serviço</small></div>
+        </div>}
+        {tab === "inicio" &&
+        <>
+          <div className="app-real-head">
+            <div className="h">Bom dia, Cícero!</div>
           </div>
-          <div className="app-job">
-            <div className="badge">LP</div>
-            <div className="meta">
-              <span className="role">Limpeza pós-obra</span>
-              <span className="loc">Belo Horizonte · MG · 3,8 km</span>
+          <div className="app-feed">
+            <div className="app-notice-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z" /><path d="M12 8v4M12 15h.01" /></svg>
+              <strong>Verifique sua identidade</strong>
+              <p>É necessário para poder se candidatar às vagas.</p>
+              <div className="app-notice-cta">Verificar agora</div>
             </div>
-            <div className="val">R$ 150<small>diária</small></div>
+            <div className="app-notice-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2"><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M3 10h18M7 15h3" /></svg>
+              <strong>Cadastre sua chave Pix!</strong>
+              <p>Para receber os pagamentos dos seus serviços, você precisa cadastrar uma chave Pix.</p>
+              <div className="app-notice-cta">Cadastrar Pix</div>
+            </div>
+            <div className="app-notice-card plain">
+              <strong>Serviços de hoje</strong>
+              <p>Você não tem serviços reservados para hoje.</p>
+              <div className="app-notice-ghost" onClick={() => setTab("vagas")}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                Buscar vagas
+              </div>
+            </div>
           </div>
-        </div>
+        </>}
+        {tab === "vagas" &&
+        <>
+          <div className="app-real-head">
+            <div className="h">Solicitações de serviço</div>
+            <div className="sub">15 oportunidades em até 5 km de você.</div>
+          </div>
+          <div className="app-sort-row">
+            <div className="app-sort">Ordenar: Relevância</div>
+            <div className="app-filter">Filtros</div>
+          </div>
+          <div className="app-days">
+            {[["SEG", "14"], ["TER", "15"], ["QUA", "16"], ["QUI", "17"], ["SEX", "18"]].map(([d, n]) =>
+            <div className="app-day" key={d}><small>{d}</small><strong>{n}</strong><span></span></div>)}
+          </div>
+          <div className="app-feed">
+            <div className="app-job-real">
+              <div className="jr-top">
+                <span className="jr-tag">AJUDANTE DE OBRA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4.5 8-11.8A8 8 0 0 0 4 10.2C4 17.5 12 22 12 22z" /><circle cx="12" cy="10" r="1.4" fill="currentColor" /></svg>
+              </div>
+              <div className="jr-loc">Jardim Santa Cecília, Guarulhos · 0.5 km</div>
+              <div className="jr-time">14/09 – 17/09 · 08:00–15:00 · 7h/dia</div>
+              <div className="jr-bottom">
+                <div className="jr-price">4 diárias · R$ 150<small>/dia</small></div>
+                <div className="jr-cta">Candidatar-se</div>
+              </div>
+            </div>
+            <div className="app-job-real">
+              <div className="jr-top">
+                <span className="jr-tag">AJUDANTE DE ELÉTRICA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4.5 8-11.8A8 8 0 0 0 4 10.2C4 17.5 12 22 12 22z" /><circle cx="12" cy="10" r="1.4" fill="currentColor" /></svg>
+              </div>
+              <div className="jr-loc">Vila Rio, Guarulhos · 0.4 km</div>
+              <div className="jr-time">24/09 · 11:00–19:30 · 8.5h/dia</div>
+              <div className="jr-bottom">
+                <div className="jr-price">1 diária · R$ 180<small>/dia</small></div>
+                <div className="jr-cta">Candidatar-se</div>
+              </div>
+            </div>
+            <div className="app-job-real">
+              <div className="jr-top">
+                <span className="jr-tag">AJUDANTE DE PINTURA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4.5 8-11.8A8 8 0 0 0 4 10.2C4 17.5 12 22 12 22z" /><circle cx="12" cy="10" r="1.4" fill="currentColor" /></svg>
+              </div>
+              <div className="jr-loc">Centro, Guarulhos · 1.1 km</div>
+              <div className="jr-time">28/09 · 08:00–17:00 · 8h/dia</div>
+              <div className="jr-bottom">
+                <div className="jr-price">2 diárias · R$ 160<small>/dia</small></div>
+                <div className="jr-cta">Candidatar-se</div>
+              </div>
+            </div>
+          </div>
+        </>}
+        {tab === "painel" &&
+        <>
+          <div className="app-real-head">
+            <div className="h">Meu painel</div>
+            <div className="sub">Suas candidaturas e serviços concluídos.</div>
+          </div>
+          <div className="app-avail-row">
+            <div>
+              <strong>Disponível para novos serviços</strong>
+              <small>Contratantes veem você como disponível.</small>
+            </div>
+            <div className="app-switch on"><span></span></div>
+          </div>
+          <div className="app-tabs">
+            <div className="app-tab on">Enviados 3</div>
+            <div className="app-tab">Pendentes</div>
+            <div className="app-tab">Aceitos</div>
+          </div>
+          <div className="app-feed">
+            <div className="app-job-real">
+              <div className="jr-top">
+                <span className="jr-tag">AJUDANTE DE OBRA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4.5 8-11.8A8 8 0 0 0 4 10.2C4 17.5 12 22 12 22z" /><circle cx="12" cy="10" r="1.4" fill="currentColor" /></svg>
+              </div>
+              <div className="jr-loc">Centro, Guarulhos · 11/09</div>
+              <div className="jr-time">16:30–20:30 · 4h/dia · 1 diária · R$ 130/dia</div>
+              <div className="jr-bottom">
+                <div className="jr-cta alt">Conversar</div>
+                <div className="jr-cta ghost">Candidatura enviada</div>
+              </div>
+            </div>
+            <div className="app-job-real">
+              <div className="jr-top">
+                <span className="jr-tag">AJUDANTE DE PINTURA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4.5 8-11.8A8 8 0 0 0 4 10.2C4 17.5 12 22 12 22z" /><circle cx="12" cy="10" r="1.4" fill="currentColor" /></svg>
+              </div>
+              <div className="jr-loc">Vila Rio, Guarulhos · 12/09</div>
+              <div className="jr-time">08:00–12:00 · 4h/dia · 1 diária · R$ 110/dia</div>
+              <div className="jr-bottom">
+                <div className="jr-cta alt">Conversar</div>
+                <div className="jr-cta ghost">Candidatura enviada</div>
+              </div>
+            </div>
+            <div className="app-job-real">
+              <div className="jr-top">
+                <span className="jr-tag">AJUDANTE DE ELÉTRICA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4.5 8-11.8A8 8 0 0 0 4 10.2C4 17.5 12 22 12 22z" /><circle cx="12" cy="10" r="1.4" fill="currentColor" /></svg>
+              </div>
+              <div className="jr-loc">Vila Rio, Guarulhos · 14/09</div>
+              <div className="jr-time">11:00–19:30 · 8.5h/dia · 1 diária · R$ 180/dia</div>
+              <div className="jr-bottom">
+                <div className="jr-cta alt">Conversar</div>
+                <div className="jr-cta ghost">Candidatura enviada</div>
+              </div>
+            </div>
+          </div>
+        </>}
+        {tab === "conversas" &&
+        <>
+          <div className="app-real-head">
+            <div className="h">Conversas</div>
+            <div className="sub">Fale direto com contratantes e o suporte.</div>
+          </div>
+          <div className="app-feed">
+            <div className="app-chat">
+              <img className="badge-photo" src="assets/avatar-chat-avatar-1.webp" alt="" />
+              <div className="meta"><span className="role">Construtora Oliveira</span><span className="loc">Combinado! Te espero às 8h.</span></div>
+              <small>09:14</small>
+            </div>
+            <div className="app-chat">
+              <img className="badge-photo" src="assets/support-agent.jpeg" alt="" />
+              <div className="meta"><span className="role">Suporte Labuu</span><span className="loc">Seu cadastro foi aprovado ✅</span></div>
+              <small>Ontem</small>
+            </div>
+            <div className="app-chat">
+              <img className="badge-photo" src="assets/avatar-chat-avatar-3.webp" alt="" />
+              <div className="meta"><span className="role">Reforma Moura</span><span className="loc">Ficou show o serviço de ontem 👍</span></div>
+              <small>Ontem</small>
+            </div>
+          </div>
+        </>}
+        {tab === "menu" &&
+        <div className="app-menu-body">
+          <div className="app-menu-header">
+            <img className="app-menu-avatar" src="https://i.pravatar.cc/64?img=52" alt="" />
+            <div className="app-menu-who">
+              <strong>Ajudante</strong>
+              <small>Ajudante</small>
+            </div>
+            <div className="app-menu-icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4v6h6M20 20v-6h-6" /><path d="M20 10a8 8 0 0 0-14.9-3M4 14a8 8 0 0 0 14.9 3" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8a6 6 0 1 0-12 0c0 5-2 6-2 8h16c0-2-2-3-2-8z" /><path d="M10 20a2 2 0 0 0 4 0" /></svg>
+            </div>
+          </div>
+          <div className="app-menu-statcard">
+            <div className="app-menu-stat"><strong>4.9</strong><small>Avaliação</small></div>
+            <div className="app-menu-stat"><strong>127</strong><small>Atendimentos<br />finalizados</small></div>
+            <div className="app-menu-stat"><strong>3</strong><small>Serviços em<br />aberto</small></div>
+          </div>
+          <div className="app-menu-cta">Meu desempenho</div>
+          <div className="app-menu-scroll">
+            <div className="app-menu-visited-title">Mais visitados</div>
+            <div className="app-menu-grid">
+              <div className="app-menu-grid-item">
+                <div className="app-menu-grid-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" /></svg></div>
+                <small>Perfil</small>
+              </div>
+              <div className="app-menu-grid-item">
+                <div className="app-menu-grid-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M3 10h18M7 15h3" /></svg></div>
+                <small>Carteira</small>
+              </div>
+              <div className="app-menu-grid-item">
+                <div className="app-menu-grid-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 4 3 20h18z" /><path d="M12 10v4M12 17h.01" /></svg></div>
+                <small>Ocorrências</small>
+              </div>
+              <div className="app-menu-grid-item">
+                <div className="app-menu-grid-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M3 10h18" /></svg></div>
+                <small>Dados bancários</small>
+              </div>
+            </div>
+            <div className="app-menu-list">
+              <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" /></svg><span>Perfil</span><small>›</small></div>
+              <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M3 10h18" /></svg><span>Dados bancários</span><small>›</small></div>
+              <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 4 3 20h18z" /><path d="M12 10v4M12 17h.01" /></svg><span>Ocorrências</span><small>›</small></div>
+              <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M3 10h18M7 15h3" /></svg><span>Carteira</span><small>›</small></div>
+              <div className="app-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="7" cy="7" r="2.4" /><circle cx="17" cy="5" r="2.2" /><circle cx="17" cy="19" r="2.2" /><path d="M9 8.4 15 5.6M9 9.6l6 8" /></svg><span>Convidar amigos</span><small>›</small></div>
+            </div>
+          </div>
+        </div>}
         <div className="app-nav">
-          <div className="app-nav-item on">
+          <div className={"app-nav-item" + (tab === "inicio" ? " on" : "")} onClick={() => setTab("inicio")}>
             <div className="app-nav-icon">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 4 9v12h5v-7h6v7h5V9z" /></svg>
             </div>
-            Chamados
+            Início
           </div>
-          <div className="app-nav-item">
+          <div className={"app-nav-item" + (tab === "vagas" ? " on" : "")} onClick={() => setTab("vagas")}>
             <div className="app-nav-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3 0-8 1.5-8 4.5V21h16v-2.5c0-3-5-4.5-8-4.5z" /></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 3v18l-6-3V6zm2 0 4-2 4 2v18l-4-2zm10 0v18l-6-3V3z" /></svg>
             </div>
-            Perfil
+            Vagas
           </div>
-          <div className="app-nav-item">
+          <div className={"app-nav-item" + (tab === "painel" ? " on" : "")} onClick={() => setTab("painel")}>
+            <div className="app-nav-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4zm9 0h7v7h-7zm-9 9h7v7H4zm9 0h7v7h-7z" /></svg>
+            </div>
+            Painel
+          </div>
+          <div className={"app-nav-item" + (tab === "conversas" ? " on" : "")} onClick={() => setTab("conversas")}>
             <div className="app-nav-icon">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z" /></svg>
             </div>
-            Mensagens
+            Conversas
+          </div>
+          <div className={"app-nav-item" + (tab === "menu" ? " on" : "")} onClick={() => setTab("menu")}>
+            <div className="app-nav-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" /></svg>
+            </div>
+            Menu
           </div>
         </div>
-      </div>
-      <div className="float-card">
-        <div className="ico">+1</div>
-        <div className="meta">
-          <strong>Novo chamado</strong>
-          <small>Curitiba · R$ 200/dia</small>
-        </div>
+        </>}
       </div>
     </div>);
 
@@ -458,10 +768,10 @@ function PrelaunchModal({ onClose, onContinue }) {
       <div className="prelaunch-card" onClick={(e) => e.stopPropagation()}>
         <button className="prelaunch-close" onClick={onClose} aria-label="Fechar">×</button>
         <div className="prelaunch-badge">🔥 VAGAS LIMITADAS · PRÉ-LANÇAMENTO</div>
-        <h3>O app Labuu está chegando — e você pode entrar antes de todo mundo</h3>
-        <p>Entre agora no grupo oficial de pré-lançamento no WhatsApp e garanta benefícios exclusivos, só pra quem chegar cedo.</p>
+        <h3>O app Labuu está chegando — e você pode garantir sua vaga antes de todo mundo</h3>
+        <p>Faça seu cadastro agora e garanta sua vaga no aplicativo assim que ele for lançado.</p>
         <button type="button" className="prelaunch-cta" onClick={onContinue}>
-          👉 Entrar no grupo de pré-lançamento
+          👉 Cadastrar agora
         </button>
       </div>
     </div>);
@@ -537,7 +847,7 @@ function ChoiceGroup({ name, options, selected, onSelect, outroValue, onOutroCha
 // ───────────────────── Cadastro modal ─────────────────────
 function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
   const [form, setForm] = useState({
-    nome: "", telefone: "", interesse: "ajudante",
+    nome: "", telefone: "", email: "", senha: "", confirmarSenha: "", interesse: "ajudante",
     cidade: "", uf: "",
     especialidade: "", especialidadeOutro: "",
     dificuldade: "", dificuldadeOutro: ""
@@ -583,6 +893,18 @@ function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
       setError("Informe um número de celular válido.");
       return;
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      setError("Informe um e-mail válido.");
+      return;
+    }
+    if (form.senha.length < 6) {
+      setError("A senha precisa ter pelo menos 6 caracteres.");
+      return;
+    }
+    if (form.confirmarSenha !== form.senha) {
+      setError("As senhas não coincidem.");
+      return;
+    }
     if (!form.especialidade) {
       setError("Selecione sua especialidade.");
       return;
@@ -608,6 +930,8 @@ function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
         body: JSON.stringify({
           nome: form.nome,
           telefone: form.telefone,
+          email: form.email,
+          senha: form.senha,
           interesse: form.interesse,
           cidade: form.cidade,
           uf: form.uf,
@@ -615,7 +939,19 @@ function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
           dificuldade: resolveSingle(form.dificuldade, form.dificuldadeOutro)
         })
       });
-      if (!res.ok) throw new Error("bad status");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        if (res.status === 409 && data.error === "already_registered") {
+          setSending(false);
+          setError(
+            data.field === "email"
+              ? "Esse e-mail já está cadastrado. Use o link \"Entrar\" abaixo pra acessar sua conta."
+              : "Esse telefone já está cadastrado. Use o link \"Entrar\" abaixo pra acessar sua conta."
+          );
+          return;
+        }
+        throw new Error("bad status");
+      }
 
       const event_id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
       if (window.ttq) ttq.track("CompleteRegistration", {}, { event_id });
@@ -658,6 +994,21 @@ function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
                 Número de celular
                 <input type="tel" required autoComplete="tel" value={form.telefone}
                   onChange={(e) => update("telefone", formatPhone(e.target.value))} placeholder="(11) 98765-4321" />
+              </label>
+              <label className="cadastro-label">
+                E-mail
+                <input type="email" required autoComplete="email" value={form.email}
+                  onChange={(e) => update("email", e.target.value)} placeholder="seu@email.com" />
+              </label>
+              <label className="cadastro-label">
+                Crie uma senha
+                <input type="password" required autoComplete="new-password" value={form.senha}
+                  onChange={(e) => update("senha", e.target.value)} placeholder="Mínimo 6 caracteres" />
+              </label>
+              <label className="cadastro-label">
+                Confirme sua senha
+                <input type="password" required autoComplete="new-password" value={form.confirmarSenha}
+                  onChange={(e) => update("confirmarSenha", e.target.value)} placeholder="Repita a senha" />
               </label>
 
               <div className="cadastro-label" style={{ marginBottom: 0 }}>Seu interesse é encontrar oportunidade de serviço como...</div>
@@ -719,6 +1070,7 @@ function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
 // ───────────────────── Login form ─────────────────────
 function LoginForm({ onSuccess, onSwitchStep }) {
   const [telefone, setTelefone] = useState("");
+  const [senha, setSenha] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
@@ -730,11 +1082,11 @@ function LoginForm({ onSuccess, onSwitchStep }) {
       const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ telefone })
+        body: JSON.stringify({ telefone, senha })
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) {
-        setError("Não encontramos esse número. Confere e tenta de novo.");
+        setError("Telefone ou senha incorretos. Confere e tenta de novo.");
         setSending(false);
         return;
       }
@@ -755,6 +1107,11 @@ function LoginForm({ onSuccess, onSwitchStep }) {
           Número de celular
           <input type="tel" required autoComplete="tel" value={telefone}
             onChange={(e) => setTelefone(formatPhone(e.target.value))} placeholder="(11) 98765-4321" />
+        </label>
+        <label className="cadastro-label">
+          Senha
+          <input type="password" required autoComplete="current-password" value={senha}
+            onChange={(e) => setSenha(e.target.value)} placeholder="Sua senha" />
         </label>
 
         {error && <p className="cadastro-error">{error}</p>}
@@ -817,7 +1174,7 @@ function App() {
             <a href="#faq">Dúvidas</a>
           </div>
           <button type="button" className="nav-cta" onClick={openCadastro}>
-            Baixar app <span>→</span>
+            Faça cadastro <span>→</span>
           </button>
         </div>
       </nav>
@@ -1023,6 +1380,20 @@ function App() {
               <span className="sep">·</span>
               <a href="https://wa.me/551129378525" target="_blank" rel="noopener noreferrer">Suporte</a>
             </div>
+            <div className="footer-social">
+              <a href="https://instagram.com/labuuapp" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg>
+              </a>
+              <a href="https://facebook.com/labuuapp" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.14 8.44 9.94v-7.03H7.9v-2.91h2.54v-2.2c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.85h2.78l-.44 2.91h-2.34V22c4.78-.8 8.44-4.94 8.44-9.94z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
@@ -1030,7 +1401,7 @@ function App() {
       {/* Sticky CTA (mobile) */}
       <button type="button" onClick={openCadastro}
       className={`sticky-cta ${scrolled ? "show" : ""}`}>
-        <span>Baixar na Google Play</span>
+        <span>Faça cadastro</span>
         <span className="arrow">→</span>
       </button>
 

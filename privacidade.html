@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Política de Privacidade — Labuu</title>
+<meta name="description" content="Aviso de Privacidade da LABUU TECNOLOGIA E INTERMEDIAÇÃO DE SERVIÇOS LTDA, em conformidade com a Lei nº 13.709/2018 (LGPD).">
 
 <link rel="icon" type="image/png" href="assets/favicon.png" />
 <link rel="apple-touch-icon" href="assets/favicon.png" />
@@ -49,11 +50,20 @@
     border-radius:999px;padding:6px 14px;margin-bottom:18px}
   .policy-hero h1{margin:0 0 16px;font-family:"Archivo Narrow",sans-serif;font-weight:800;
     font-size:clamp(30px, 4.4vw, 44px);line-height:1.1;letter-spacing:-.015em}
-  .policy-hero p{margin:0 0 8px;font-size:16px;line-height:1.6;color:var(--muted);max-width:62ch}
-  .policy-hero .policy-updated{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--muted)}
+  .policy-hero p{margin:0 0 8px;font-size:16px;line-height:1.6;color:var(--muted);max-width:68ch}
+  .policy-hero .policy-updated{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--muted);margin-top:16px}
+
+  .policy-toc{background:var(--paper);border:1px solid var(--rule);border-radius:16px;
+    padding:24px 28px;margin:32px 0 0}
+  .policy-toc h2{margin:0 0 14px;font-family:"Archivo",sans-serif;font-weight:800;font-size:15px;color:var(--ink)}
+  .policy-toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px;list-style:decimal}
+  .policy-toc li{margin-bottom:8px;font-size:14px;break-inside:avoid}
+  .policy-toc a{color:var(--ink-2);text-decoration:none}
+  .policy-toc a:hover{color:var(--accent)}
+  @media (max-width:620px){.policy-toc ol{columns:1}}
 
   .policy-sections{padding:16px 0 80px}
-  .policy-section{padding:32px 0;border-top:1px solid var(--rule)}
+  .policy-section{padding:32px 0;border-top:1px solid var(--rule);scroll-margin-top:24px}
   .policy-num{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--accent-deep);font-weight:700}
   .policy-section h2{margin:8px 0 14px;font-family:"Archivo",sans-serif;font-weight:800;font-size:21px;color:var(--ink)}
   .policy-section h3{margin:22px 0 8px;font-family:"Archivo",sans-serif;font-weight:700;font-size:15.5px;color:var(--ink)}
@@ -61,12 +71,23 @@
   .policy-section ul{margin:0 0 12px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
   .policy-section ul li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--ink-2)}
   .policy-section ul li::before{content:"→";font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--accent);flex:none}
-  .policy-section table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14px}
+  .policy-section ol.lista{margin:0 0 12px;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+  .policy-section ol.lista li{font-size:15px;line-height:1.5;color:var(--ink-2)}
+  .policy-section table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14px;min-width:560px;background:var(--paper)}
   .policy-section table th,.policy-section table td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
-  .policy-section table th{font-family:"Archivo",sans-serif;font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .policy-section table th{font-family:"Archivo",sans-serif;font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--accent-soft)}
   .policy-section table td{color:var(--ink-2)}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px;border:1px solid var(--rule);border-radius:12px}
+  .table-scroll table{margin:0;border:0;border-radius:0}
 
-  .policy-contact{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:24px 28px;margin-top:8px}
+  .policy-callout{background:var(--accent-soft);border-left:3px solid var(--accent);
+    border-radius:0 12px 12px 0;padding:18px 20px;margin:0 0 20px}
+  .policy-callout p{margin:0 0 8px;font-size:14.5px}
+  .policy-callout p:last-child{margin-bottom:0}
+
+  .policy-highlight{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:4px;font-weight:600}
+
+  .policy-contact{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:24px 28px;margin:0 0 16px}
   .policy-contact strong{display:block;font-family:"Archivo",sans-serif;font-size:16px;margin-bottom:8px;color:var(--ink)}
   .policy-contact a{display:block;font-size:14.5px;color:var(--ink-2);text-decoration:none;margin-bottom:4px}
   .policy-contact a:hover{color:var(--accent)}
@@ -94,170 +115,454 @@
   <div class="wrap">
     <div class="policy-badge">LGPD · Lei 13.709/2018</div>
     <h1>Política de Privacidade</h1>
-    <p>Este Aviso de Privacidade foi elaborado pela LABUU TECNOLOGIA E INTERMEDIAÇÃO DE SERVIÇOS LTDA, inscrita no CNPJ sob nº 67.018.787/0001-90, com sede na Av. Salgado Filho, nº 2120, Sala 2221C, Andar 22, Centro, Guarulhos/SP, CEP 07.115-000 ("LABUU"). Ele explica como coletamos, usamos, armazenamos, compartilhamos e protegemos os dados pessoais de Ajudantes, Contratantes e demais visitantes de nossas plataformas.</p>
-    <p class="policy-updated">Última atualização: 11 de setembro de 2026</p>
+    <p>Este Aviso de Privacidade descreve, de forma completa e transparente, como a <strong>LABUU TECNOLOGIA E INTERMEDIAÇÃO DE SERVIÇOS LTDA</strong>, inscrita no CNPJ sob nº 67.018.787/0001-90, com sede na Av. Salgado Filho, nº 2120, Sala 2221C, 22º andar, Centro, Guarulhos/SP, CEP 07115-000 ("LABUU"), na qualidade de <strong>controladora, quando determinar as finalidades e os meios do tratamento</strong>, coleta, utiliza, armazena, compartilha, transfere e elimina dados pessoais de Ajudantes, Contratantes, visitantes e demais titulares que interagem com suas plataformas.</p>
+    <p>Este documento é redigido em cumprimento aos artigos 6º, VI, 9º e 18 da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais — "LGPD") e deve ser lido em conjunto com os <a href="termos.html">Termos de Uso</a> da plataforma.</p>
+    <p class="policy-updated"><strong style="color:var(--ink)">Versão:</strong> 3.2 &nbsp;·&nbsp; <strong style="color:var(--ink)">Vigente desde:</strong> 14 de setembro de 2026 &nbsp;·&nbsp; <strong style="color:var(--ink)">Última atualização:</strong> 14 de setembro de 2026</p>
+
+    <nav class="policy-toc" aria-label="Sumário">
+      <h2>Sumário</h2>
+      <ol>
+        <li><a href="#c1">Definições</a></li>
+        <li><a href="#c2">Âmbito de aplicação</a></li>
+        <li><a href="#c3">Dados pessoais que tratamos</a></li>
+        <li><a href="#c4">Dados sensíveis e verificação de identidade</a></li>
+        <li><a href="#c5">Crianças e adolescentes</a></li>
+        <li><a href="#c6">Geolocalização</a></li>
+        <li><a href="#c7">Cookies e tecnologias de rastreamento</a></li>
+        <li><a href="#c8">Bases legais e finalidades</a></li>
+        <li><a href="#c9">Legítimo interesse e direito de oposição</a></li>
+        <li><a href="#c10">Fornecimento facultativo e obrigatório</a></li>
+        <li><a href="#c11">Compartilhamento de dados</a></li>
+        <li><a href="#c12">Decisões automatizadas</a></li>
+        <li><a href="#c13">Armazenamento e segurança</a></li>
+        <li><a href="#c14">Transferência internacional</a></li>
+        <li><a href="#c15">Prazos de retenção e eliminação</a></li>
+        <li><a href="#c16">Direitos do titular</a></li>
+        <li><a href="#c17">Incidentes de segurança</a></li>
+        <li><a href="#c18">Responsabilidade</a></li>
+        <li><a href="#c19">Encarregado (DPO) e ANPD</a></li>
+        <li><a href="#c20">Alterações deste Aviso</a></li>
+        <li><a href="#c21">Legislação aplicável</a></li>
+      </ol>
+    </nav>
   </div>
 </header>
 
 <main class="policy-sections">
   <div class="wrap">
 
-    <section class="policy-section">
-      <div class="policy-num">01</div>
+    <section class="policy-section" id="c1">
+      <div class="policy-num">Cláusula 1</div>
       <h2>Definições</h2>
-      <p>Para os fins deste Aviso, a LABUU segue a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais — "LGPD") e a Lei Federal nº 12.965/2014, regulamentada pelo Decreto nº 8.771/2016 (Marco Civil da Internet). Os termos abaixo têm o seguinte significado:</p>
+      <p>Para os fins deste Aviso, aplicam-se as definições da LGPD, da Lei nº 12.965/2014 (Marco Civil da Internet), regulamentada pelo Decreto nº 8.771/2016, e da Lei nº 8.078/1990 (Código de Defesa do Consumidor), bem como os termos abaixo:</p>
       <ul>
         <li><b>Dado pessoal:</b>&nbsp;informação relacionada a pessoa natural identificada ou identificável.</li>
-        <li><b>Dado pessoal sensível:</b>&nbsp;dado sobre origem racial ou étnica, convicção religiosa, opinião política, filiação sindical, dado de saúde ou vida sexual, dado genético ou biométrico.</li>
-        <li><b>Titular:</b>&nbsp;a pessoa natural a quem se referem os dados pessoais tratados.</li>
-        <li><b>Tratamento:</b>&nbsp;toda operação com dados pessoais — coleta, uso, acesso, armazenamento, compartilhamento, eliminação, entre outras.</li>
-        <li><b>Anonimização:</b>&nbsp;processo pelo qual um dado deixa de poder ser associado a um indivíduo.</li>
-        <li><b>Consentimento:</b>&nbsp;manifestação livre, informada e inequívoca do titular concordando com um tratamento específico.</li>
-        <li><b>Eliminação:</b>&nbsp;exclusão definitiva de dado ou conjunto de dados.</li>
-        <li><b>Ajudante:</b>&nbsp;trabalhador avulso cadastrado na plataforma para prestação de serviços físicos pontuais.</li>
-        <li><b>Contratante:</b>&nbsp;pessoa física, autônomo ou empreiteiro que contrata Ajudantes através da plataforma.</li>
+        <li><b>Dado pessoal sensível:</b>&nbsp;dado sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dado referente à saúde ou à vida sexual, dado genético ou biométrico, quando vinculado a pessoa natural.</li>
+        <li><b>Titular:</b>&nbsp;pessoa natural a quem se referem os dados pessoais objeto de tratamento.</li>
+        <li><b>Controlador:</b>&nbsp;agente a quem competem as decisões referentes ao tratamento de dados pessoais; a LABUU, nas operações em que determina as finalidades e os meios do tratamento.</li>
+        <li><b>Operador:</b>&nbsp;terceiro que realiza tratamento de dados pessoais em nome e segundo as instruções da LABUU.</li>
+        <li><b>Encarregado (DPO):</b>&nbsp;pessoa indicada pela LABUU para atuar como canal de comunicação entre a LABUU, os titulares e a Autoridade Nacional de Proteção de Dados.</li>
+        <li><b>Tratamento:</b>&nbsp;toda operação realizada com dados pessoais, incluindo coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação, controle, modificação, comunicação, transferência, difusão ou extração.</li>
+        <li><b>Anonimização:</b>&nbsp;utilização de meios técnicos razoáveis e disponíveis no momento do tratamento, por meio dos quais um dado perde a possibilidade de associação, direta ou indireta, a um indivíduo.</li>
+        <li><b>Consentimento:</b>&nbsp;manifestação livre, informada e inequívoca pela qual o titular concorda com o tratamento de seus dados pessoais para uma finalidade determinada.</li>
+        <li><b>Eliminação:</b>&nbsp;exclusão de dado ou de conjunto de dados armazenados em banco de dados, independentemente do procedimento empregado.</li>
+        <li><b>Plataforma:</b>&nbsp;o aplicativo LABUU, o site labuu.com.br e os canais oficiais de atendimento.</li>
+        <li><b>Ajudante:</b>&nbsp;trabalhador cadastrado na Plataforma para prestação de serviços físicos pontuais, de forma autônoma e sem vínculo empregatício com a LABUU.</li>
+        <li><b>Contratante:</b>&nbsp;pessoa física, profissional autônomo, empreiteiro ou pessoa jurídica que contrata Ajudantes por meio da Plataforma.</li>
       </ul>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">02</div>
-      <h2>Aplicação</h2>
-      <p>Este Aviso de Privacidade se aplica a todos os usuários do aplicativo LABUU, do site, dos canais de atendimento (WhatsApp, telefone, e-mail) e de qualquer outra plataforma operada pela LABUU.</p>
+    <section class="policy-section" id="c2">
+      <div class="policy-num">Cláusula 2</div>
+      <h2>Âmbito de aplicação</h2>
+      <p>Este Aviso aplica-se a todo tratamento de dados pessoais realizado pela LABUU por meio do aplicativo, do site labuu.com.br, dos canais de atendimento (WhatsApp, telefone, e-mail e formulários) e de quaisquer outras plataformas, campanhas ou canais operados pela LABUU, no Brasil ou no exterior, sempre que a operação de tratamento se enquadre nas hipóteses do art. 3º da LGPD.</p>
+      <p>A LABUU atua como <b>intermediadora</b> entre Ajudantes e Contratantes. O tratamento de dados pessoais realizado por Contratantes ou Ajudantes fora da Plataforma, ou em operações nas quais a LABUU não determine as finalidades e os meios do tratamento, poderá ser de responsabilidade do respectivo agente de tratamento, conforme o caso. Isso não afasta as responsabilidades legais da LABUU pelos tratamentos que estiver sob seu controle ou por operações que realizar ou determinar.</p>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">03</div>
-      <h2>Como e quais dados coletamos</h2>
-      <p>Coletamos dados diretamente dos usuários (no cadastro, no uso da plataforma e no atendimento) e, em menor medida, de forma automática pelo uso do aplicativo.</p>
+    <section class="policy-section" id="c3">
+      <div class="policy-num">Cláusula 3</div>
+      <h2>Dados pessoais que tratamos</h2>
+      <p>A LABUU coleta dados pessoais: (i) diretamente do titular, no cadastro, no uso da Plataforma e no atendimento; (ii) automaticamente, a partir do dispositivo e da navegação; e (iii) de terceiros, quando necessário para verificação cadastral, prevenção a fraudes ou processamento de pagamentos.</p>
 
-      <h3>Dados de Ajudantes</h3>
+      <h3>3.1. Dados de Ajudantes</h3>
       <ul>
-        <li><b>Identificação:</b>&nbsp;nome completo, CPF, foto de perfil, imagens de verificação de identidade, data de nascimento.</li>
-        <li><b>Contato:</b>&nbsp;telefone, e-mail, endereço, cidade, região de atuação.</li>
-        <li><b>Profissionais e de reputação:</b>&nbsp;histórico de diárias realizadas na plataforma, avaliações recebidas, tipos de serviço executados, experiência declarada.</li>
-        <li><b>Documentais:</b>&nbsp;RG, CPF, comprovante de residência e, quando aplicável, comprovantes de qualificação ou curso.</li>
-        <li><b>Financeiros:</b>&nbsp;chave Pix para recebimento dos valores das diárias.</li>
+        <li><b>Identificação:</b>&nbsp;nome completo, CPF, data de nascimento, foto de perfil e imagens enviadas para verificação de identidade.</li>
+        <li><b>Biométricos (dado pessoal sensível):</b>&nbsp;dados biométricos faciais gerados na comparação automatizada entre a imagem enviada e o documento apresentado, tratados exclusivamente nos termos da Cláusula 4.</li>
+        <li><b>Contato e localização declarada:</b>&nbsp;telefone, e-mail, endereço residencial, cidade e região de atuação.</li>
+        <li><b>Profissionais e de reputação:</b>&nbsp;histórico de diárias realizadas, avaliações recebidas, tipos de serviço executados, experiência declarada, taxa de aceitação e de conclusão de serviços.</li>
+        <li><b>Documentais:</b>&nbsp;RG ou documento equivalente, CPF, comprovante de residência e, quando aplicável, comprovantes de qualificação, curso ou certificação.</li>
+        <li><b>Financeiros:</b>&nbsp;chave Pix e dados necessários ao recebimento dos valores das diárias.</li>
       </ul>
 
-      <h3>Dados de Contratantes (pessoa física, autônomo ou empreiteiro)</h3>
+      <h3>3.2. Dados de Contratantes</h3>
       <ul>
-        <li>Nome completo ou razão social, CPF ou CNPJ.</li>
-        <li>Telefone, e-mail, endereço da obra ou local de trabalho.</li>
-        <li>Histórico de contratações, avaliações feitas e recebidas, dados de pagamento (para cobrança das assinaturas e taxas da plataforma).</li>
+        <li>Nome completo ou razão social; CPF ou CNPJ.</li>
+        <li>Telefone, e-mail, endereço da obra ou do local de trabalho.</li>
+        <li>Histórico de contratações, avaliações feitas e recebidas.</li>
+        <li>Dados de pagamento e cobrança relativos a assinaturas e taxas da Plataforma, incluindo os dados necessários à emissão de documentos fiscais.</li>
       </ul>
 
-      <h3>Dados de navegação e do dispositivo</h3>
-      <p>Endereço IP, informações de conexão, sistema operacional, modelo do dispositivo, data e hora de acesso, tempo de uso do aplicativo e interações realizadas na plataforma.</p>
+      <h3>3.3. Dados de navegação e do dispositivo</h3>
+      <p>Endereço IP, identificadores do dispositivo, informações de conexão, sistema operacional e sua versão, modelo do aparelho, idioma, data e hora de acesso, tempo de uso, telas visitadas e interações realizadas na Plataforma, bem como registros de acesso a aplicações de internet, cuja guarda é exigida pelo art. 15 da Lei nº 12.965/2014.</p>
 
-      <h3>Geolocalização</h3>
-      <p>A LABUU coleta dados de localização <b>apenas quando o usuário autoriza pelo dispositivo</b>, e unicamente para as seguintes finalidades:</p>
-      <ul>
-        <li>Exibir a proximidade entre Ajudante e Contratante <b>antes da aceitação de um serviço</b> (para viabilizar a escolha);</li>
-        <li>Registrar os marcos de <b>"Iniciar trabalho"</b> e <b>"Trabalho concluído"</b>, informados manualmente pelo usuário.</li>
-      </ul>
-      <p>Importante: a LABUU <b>não realiza rastreamento contínuo de localização</b>, não exige fotos obrigatórias durante o serviço e não monitora o trabalho hora a hora.</p>
+      <h3>3.4. Dados de atendimento</h3>
+      <p>Dados fornecidos por telefone, e-mail, WhatsApp ou formulário — em regra nome, telefone, e-mail e o teor da solicitação —, além do registro do atendimento, utilizados para identificação do titular, resposta à demanda, comprovação do atendimento e melhoria da qualidade do suporte.</p>
 
-      <h3>Canais de atendimento</h3>
-      <p>Dados fornecidos por telefone, e-mail, WhatsApp ou formulário do site, para identificação do usuário e atendimento de sua solicitação — normalmente nome, telefone e e-mail.</p>
+      <h3>3.5. Dados contratuais e fiscais</h3>
+      <p>Na contratação de planos pagos ou de serviços de intermediação, são coletados os dados necessários à formalização do contrato e à emissão de documentos fiscais, tais como CPF ou CNPJ, razão social, inscrição estadual ou municipal quando aplicável, endereço completo e dados de cobrança.</p>
 
-      <h3>Cookies</h3>
-      <p>O aplicativo e o site podem utilizar cookies e tecnologias semelhantes para funcionamento, segurança e melhoria da experiência do usuário.</p>
-
-      <h3>Contrato e nota fiscal</h3>
-      <p>Ao contratar planos pagos (assinaturas Bronze/Ouro) ou serviços de intermediação, coletamos os dados necessários para a formalização do contrato e emissão de documentos fiscais, como CPF/CNPJ, razão social, endereço e dados de cobrança.</p>
+      <div class="policy-callout">
+        <p><b>A LABUU não vende dados pessoais</b> e não os disponibiliza a terceiros para fins de comercialização, enriquecimento de bases de dados de terceiros ou publicidade de produtos alheios à LABUU.</p>
+      </div>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">04</div>
+    <section class="policy-section" id="c4">
+      <div class="policy-num">Cláusula 4</div>
+      <h2>Dados sensíveis e verificação de identidade</h2>
+
+      <p>A verificação de identidade de Ajudantes envolve a comparação automatizada entre a imagem enviada pelo titular e a imagem constante do documento apresentado, o que caracteriza tratamento de <b>dado biométrico</b>, classificado como dado pessoal sensível pelo art. 5º, II, da LGPD.</p>
+
+      <p>Esse tratamento é realizado <b>exclusivamente mediante consentimento específico e destacado</b> do titular, colhido em tela própria no momento da verificação, apartada do aceite dos Termos de Uso e deste Aviso, nos termos do art. 11, I, da LGPD. A finalidade é única e exclusiva: <b>prevenção a fraudes e segurança de Ajudantes e Contratantes</b>.</p>
+
+      <p>São asseguradas ao titular as seguintes garantias:</p>
+      <ul>
+        <li>a <b>recusa do tratamento biométrico</b> é possível, hipótese em que, quando tecnicamente e operacionalmente disponível, a verificação de identidade será realizada por análise humana ou por procedimento alternativo razoável, sem prejuízo indevido ao cadastro;</li>
+        <li>o <b>consentimento pode ser revogado a qualquer tempo</b>, de forma gratuita e facilitada, nos termos da Cláusula 16, produzindo efeitos para os tratamentos futuros e ensejando a eliminação dos dados biométricos quando não houver outra hipótese legal de conservação prevista no art. 16 da LGPD;</li>
+        <li>os dados biométricos <b>não são compartilhados com terceiros</b>, ressalvado o operador estritamente necessário à execução da verificação, vinculado contratualmente à mesma finalidade;</li>
+        <li>os dados biométricos <b>não são utilizados para qualquer outra finalidade</b>, sendo vedado seu uso publicitário, de perfilamento comportamental ou de treinamento de modelos de inteligência artificial;</li>
+        <li>os dados biométricos são <b>eliminados ou anonimizados no prazo da Cláusula 15</b>, ressalvadas as hipóteses legais de conservação.</li>
+      </ul>
+
+      <p>A LABUU mantém registro das operações de tratamento de dados biométricos e elaborará relatório de impacto à proteção de dados pessoais quando requerido pela ANPD, nos termos do art. 38 da LGPD.</p>
+
+      <p>Em nenhuma hipótese a LABUU exige ou coleta informações sobre origem racial ou étnica, convicção religiosa, opinião política, filiação sindical, saúde, vida sexual ou dados genéticos. Caso tais informações sejam enviadas espontaneamente pelo titular em campo livre ou em canal de atendimento, serão eliminadas assim que identificadas, salvo se indispensáveis ao atendimento de obrigação legal.</p>
+    </section>
+
+    <section class="policy-section" id="c5">
+      <div class="policy-num">Cláusula 5</div>
+      <h2>Crianças e adolescentes</h2>
+      <p>A Plataforma destina-se <b>exclusivamente a pessoas maiores de 18 (dezoito) anos</b>, plenamente capazes. A LABUU não coleta intencionalmente dados pessoais de crianças ou adolescentes e verifica a idade declarada no cadastro.</p>
+      <p>Identificado cadastro de titular menor de 18 anos, a conta será imediatamente suspensa e os dados pessoais eliminados, salvo aqueles cuja guarda seja exigida por lei, observado o art. 14 da LGPD. Pais ou responsáveis que identifiquem cadastro de menor sob sua responsabilidade devem comunicar a LABUU pelo canal indicado na Cláusula 19, e a exclusão será processada em até 5 (cinco) dias úteis.</p>
+    </section>
+
+    <section class="policy-section" id="c6">
+      <div class="policy-num">Cláusula 6</div>
+      <h2>Geolocalização</h2>
+      <p>A LABUU trata dados de localização <b>somente mediante consentimento do titular</b> (art. 7º, I, da LGPD), manifestado por meio das permissões do sistema operacional do dispositivo. Os registros já gerados sob esse consentimento podem ser conservados, pelo prazo da Cláusula 15, para exercício regular de direitos (art. 7º, VI). O tratamento é limitado às seguintes finalidades:</p>
+      <ol class="lista">
+        <li>exibir a proximidade aproximada entre Ajudante e Contratante <b>antes da aceitação de um serviço</b>, de modo a viabilizar a escolha e a estimativa de deslocamento;</li>
+        <li>registrar os marcos de <b>"Iniciar trabalho"</b> e <b>"Trabalho concluído"</b>, acionados manualmente pelo próprio usuário, para fins de comprovação da execução do serviço e resolução de disputas.</li>
+      </ol>
+      <p>O tratamento de localização possui finalidade estritamente operacional, de segurança, comprovação da execução do serviço e exercício regular de direitos. <b>O registro desses dados não se destina a controlar jornada, frequência, horário de trabalho, disponibilidade, produtividade, pausas, rotas ou modo de execução das atividades pelo Ajudante, nem a estabelecer supervisão hierárquica, comando ou fiscalização contínua da prestação de serviços.</b> A utilização da funcionalidade de localização, isoladamente considerada, não constitui reconhecimento de relação de emprego, subordinação jurídica, controle de jornada ou vínculo trabalhista entre a LABUU, o Ajudante e o Contratante, sem prejuízo da análise da realidade efetivamente praticada e da legislação aplicável.</p>
+      <p>A LABUU declara expressamente que:</p>
+      <ul>
+        <li><b>não realiza rastreamento contínuo</b> de localização, em primeiro ou segundo plano;</li>
+        <li><b>não coleta localização com o aplicativo fechado</b> ou fora dos momentos descritos nos itens (i) e (ii) acima;</li>
+        <li><b>não exige fotografias obrigatórias</b> durante a execução do serviço;</li>
+        <li><b>não utiliza os registros de localização para controle de jornada, assiduidade, produtividade ou fiscalização contínua da execução do trabalho;</b></li>
+        <li><b>não utiliza localização para finalidade publicitária</b> ou de perfilamento comportamental.</li>
+      </ul>
+      <p><b>A recusa ou a revogação da permissão de localização não bloqueia a conta nem impede o uso da Plataforma.</b> Ela produz apenas dois efeitos técnicos: reduz a precisão da exibição de oportunidades próximas e impede o registro automático dos marcos de início e conclusão, que passará a depender de confirmação manual das partes. Nenhum desses efeitos implica penalização, redução de reputação ou restrição de acesso a oportunidades. A revogação pode ser feita a qualquer tempo nas configurações do dispositivo, sem ônus, produzindo efeitos para os tratamentos futuros e sem afetar a licitude dos tratamentos anteriores.</p>
+    </section>
+
+    <section class="policy-section" id="c7">
+      <div class="policy-num">Cláusula 7</div>
+      <h2>Cookies e tecnologias de rastreamento</h2>
+      <p>O site e o aplicativo utilizam cookies e tecnologias semelhantes (pixels, SDKs, identificadores de dispositivo e armazenamento local), organizados nas categorias abaixo:</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Categoria</th><th>Função</th><th>Base legal</th><th>Pode ser recusado?</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Necessários</b></td>
+              <td>Autenticação, manutenção de sessão, segurança, prevenção a fraudes, balanceamento de carga e funcionamento básico da Plataforma.</td>
+              <td>Execução de contrato e legítimo interesse</td>
+              <td>Não — sem eles a Plataforma não funciona</td>
+            </tr>
+            <tr>
+              <td><b>Desempenho e análise</b></td>
+              <td>Medição de audiência, identificação de erros e de pontos de abandono, melhoria de usabilidade. Ferramentas: Google Analytics 4 e Google Tag Manager.</td>
+              <td>Consentimento</td>
+              <td>Sim</td>
+            </tr>
+            <tr>
+              <td><b>Publicidade e remarketing</b></td>
+              <td>Mensuração de campanhas, atribuição de conversões e exibição de anúncios da LABUU em plataformas de terceiros. Ferramentas: Google Ads, Meta Ads (Pixel da Meta) e TikTok Ads (TikTok Pixel).</td>
+              <td>Consentimento</td>
+              <td>Sim</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>No primeiro acesso, é exibido banner que permite <b>aceitar, recusar ou escolher por categoria</b>. Cookies não necessários somente são ativados após consentimento específico. A recusa é tão simples quanto o aceite e não degrada a funcionalidade da Plataforma.</p>
+      <p>O titular pode revisar ou revogar suas escolhas a qualquer tempo por meio do link <span class="policy-highlight">"Preferências de cookies"</span>, disponível no rodapé do site, ou pelas configurações do próprio navegador. A revogação não afeta a licitude do tratamento realizado antes dela.</p>
+      <p>Os cookies de análise e de publicidade implicam compartilhamento de dados com os provedores indicados na Cláusula 11, que podem tratá-los como controladores independentes conforme suas próprias políticas de privacidade.</p>
+    </section>
+
+    <section class="policy-section" id="c8">
+      <div class="policy-num">Cláusula 8</div>
       <h2>Bases legais e finalidades do tratamento</h2>
-      <table>
-        <thead><tr><th>Finalidade</th><th>Base legal</th></tr></thead>
-        <tbody>
-          <tr><td>Cadastro, verificação e autenticação de Ajudantes e Contratantes</td><td>Execução de contrato / cumprimento de obrigação legal</td></tr>
-          <tr><td>Viabilizar a escolha de Ajudantes por reputação e histórico</td><td>Execução de contrato</td></tr>
-          <tr><td>Processamento de pagamentos, assinaturas e repasses via Pix</td><td>Execução de contrato</td></tr>
-          <tr><td>Comunicação com o usuário, incluindo suporte e emergências</td><td>Legítimo interesse</td></tr>
-          <tr><td>Prevenção a fraudes e segurança da plataforma</td><td>Legítimo interesse</td></tr>
-          <tr><td>Melhoria do aplicativo, dos serviços e desenvolvimento de novas funcionalidades</td><td>Legítimo interesse</td></tr>
-          <tr><td>Cumprimento de obrigações legais, fiscais e regulatórias</td><td>Obrigação legal</td></tr>
-          <tr><td>Comunicação de ofertas e novidades da LABUU (quando não houver oposição)</td><td>Legítimo interesse</td></tr>
-        </tbody>
-      </table>
-      <p>A LABUU utiliza a base do legítimo interesse apenas quando o tratamento não se sobrepõe aos direitos e liberdades fundamentais dos titulares.</p>
+      <p>Todo tratamento realizado pela LABUU observa uma das hipóteses legais dos arts. 7º e 11 da LGPD, conforme o quadro abaixo:</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Finalidade</th><th>Dados envolvidos</th><th>Base legal (LGPD)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Criação e manutenção de conta; autenticação</td><td>Identificação, contato, credenciais</td><td>Execução de contrato — art. 7º, V</td></tr>
+            <tr><td>Verificação cadastral e conferência documental</td><td>Documentais, identificação, imagens de verificação</td><td>Execução de contrato — art. 7º, V</td></tr>
+            <tr><td>Verificação biométrica facial de identidade (Cláusula 4)</td><td>Dados biométricos faciais</td><td><b>Consentimento específico e destacado — art. 11, I</b>, única base aplicável a esse tratamento</td></tr>
+            <tr><td>Intermediação entre Ajudante e Contratante; exibição de perfil, reputação e histórico</td><td>Perfil, avaliações, histórico de diárias</td><td>Execução de contrato — art. 7º, V</td></tr>
+            <tr><td>Exibição de proximidade e registro dos marcos de início e conclusão</td><td>Geolocalização pontual</td><td>Consentimento — art. 7º, I; conservação dos registros já gerados para exercício regular de direitos — art. 7º, VI</td></tr>
+            <tr><td>Processamento de pagamentos, assinaturas e repasses via Pix</td><td>Financeiros, identificação, cobrança</td><td>Execução de contrato — art. 7º, V</td></tr>
+            <tr><td>Emissão de documentos fiscais e escrituração</td><td>Fiscais, contratuais</td><td>Obrigação legal ou regulatória — art. 7º, II</td></tr>
+            <tr><td>Guarda de registros de acesso a aplicações de internet</td><td>IP, data e hora de acesso</td><td>Obrigação legal — art. 7º, II, c/c art. 15 do Marco Civil</td></tr>
+            <tr><td>Atendimento, suporte e resolução de disputas</td><td>Contato, teor da solicitação, histórico</td><td>Execução de contrato — art. 7º, V; exercício regular de direitos — art. 7º, VI</td></tr>
+            <tr><td>Prevenção a fraudes e segurança da Plataforma e dos usuários</td><td>Navegação, dispositivo, identificação, comportamento na Plataforma (não abrange dados biométricos)</td><td>Legítimo interesse — art. 7º, IX</td></tr>
+            <tr><td>Melhoria da Plataforma, análise estatística e desenvolvimento de funcionalidades</td><td>Navegação, uso, dados agregados ou anonimizados</td><td>Legítimo interesse — art. 7º, IX</td></tr>
+            <tr><td>Comunicações transacionais e operacionais (avisos de serviço, segurança, cobrança)</td><td>Contato</td><td>Execução de contrato — art. 7º, V</td></tr>
+            <tr><td>Comunicações de marketing, ofertas e novidades da LABUU</td><td>Contato, preferências</td><td>Legítimo interesse — art. 7º, IX, com opt-out; ou consentimento — art. 7º, I, quando exigido</td></tr>
+            <tr><td>Publicidade digital, mensuração e remarketing</td><td>Identificadores de cookies e de dispositivo</td><td>Consentimento — art. 7º, I</td></tr>
+            <tr><td>Defesa em processos judiciais, administrativos ou arbitrais</td><td>Todos os necessários à defesa</td><td>Exercício regular de direitos — art. 7º, VI</td></tr>
+            <tr><td>Cumprimento de ordem de autoridade competente</td><td>Conforme o objeto da requisição</td><td>Obrigação legal — art. 7º, II</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>A LABUU não trata dados pessoais para finalidades incompatíveis com as aqui informadas. Caso surja nova finalidade ou alteração relevante de finalidade, o titular será informado de forma compatível com a LGPD e, quando a nova operação depender de consentimento, novo consentimento específico será solicitado antes do tratamento.</p>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">05</div>
+    <section class="policy-section" id="c9">
+      <div class="policy-num">Cláusula 9</div>
+      <h2>Legítimo interesse e direito de oposição</h2>
+      <p>Quando o tratamento se fundamenta no legítimo interesse (art. 7º, IX, da LGPD), a LABUU realiza previamente <b>teste de balanceamento</b>, avaliando a finalidade legítima, a necessidade do tratamento, a expectativa razoável do titular e as salvaguardas adotadas, e somente prossegue quando o interesse não se sobrepõe aos direitos e liberdades fundamentais do titular.</p>
+      <p>A LABUU mantém registro dessas avaliações e, mediante solicitação do titular, <b>fornecerá informações sobre os critérios utilizados</b>, nos termos do art. 10, §2º, da LGPD, preservados os segredos comercial e industrial. A LABUU <b>elaborará relatório de impacto à proteção de dados pessoais sempre que requerido pela ANPD</b>, na forma do art. 10, §3º, e poderá fazê-lo por iniciativa própria quando a avaliação de risco recomendar.</p>
+      <div class="policy-callout">
+        <p><b>Direito de oposição.</b> O titular pode, a qualquer tempo, opor-se a tratamento realizado com base no legítimo interesse, nos termos do art. 18, §2º, da LGPD, pelos canais da Cláusula 19. A oposição será atendida, salvo se houver motivos legítimos e imperiosos que prevaleçam sobre os interesses do titular, ou necessidade de exercício regular de direitos — hipóteses em que a LABUU apresentará justificativa fundamentada.</p>
+        <p>Para <b>comunicações de marketing</b>, a oposição é incondicional e imediata: basta clicar em "descadastrar" no rodapé de qualquer mensagem, responder "SAIR" no canal utilizado ou solicitar pelo e-mail do Encarregado. O descadastramento não afeta o recebimento de comunicações transacionais indispensáveis à prestação do serviço.</p>
+      </div>
+    </section>
+
+    <section class="policy-section" id="c10">
+      <div class="policy-num">Cláusula 10</div>
+      <h2>Fornecimento facultativo e obrigatório de dados</h2>
+      <p>Em atenção ao art. 9º, I a VI, e ao art. 18, VIII, da LGPD, a LABUU esclarece as consequências da não disponibilização de dados:</p>
+      <ul>
+        <li><b>Dados necessários à funcionalidade ou contratação</b> (como nome, contato, CPF/CNPJ e, quando exigidos para a finalidade, documentos de identificação e dados de pagamento): a ausência poderá impedir o cadastro, a verificação, a intermediação, a contratação ou o repasse correspondente, conforme o dado efetivamente necessário.</li>
+        <li><b>Dados fiscais</b>: obrigatórios para contratação de planos pagos, por exigência legal.</li>
+        <li><b>Geolocalização</b>: facultativa. A recusa não bloqueia a conta nem impede o uso da Plataforma, produzindo apenas os efeitos técnicos descritos na Cláusula 6.</li>
+        <li><b>Cookies de análise e publicidade</b>: facultativos. A recusa não altera o funcionamento da Plataforma.</li>
+        <li><b>Comunicações de marketing</b>: facultativas, a qualquer tempo dispensáveis.</li>
+        <li><b>Dados complementares</b> (foto de perfil, experiência declarada, certificados): facultativos. A ausência pode reduzir a visibilidade do perfil, sem qualquer penalização pela LABUU.</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="c11">
+      <div class="policy-num">Cláusula 11</div>
       <h2>Compartilhamento de dados pessoais</h2>
-      <p>Podemos compartilhar dados pessoais com terceiros nas seguintes hipóteses:</p>
+      <p>A LABUU compartilha dados pessoais apenas na medida estritamente necessária às finalidades declaradas, com as seguintes categorias de destinatários:</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Destinatário</th><th>Dados compartilhados</th><th>Motivo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Entre Ajudante e Contratante</td><td>Nome, foto, avaliações, região, telefone de contato durante o serviço, endereço do local de trabalho</td><td>Viabilizar a contratação e a execução do serviço</td></tr>
+            <tr><td>Provedores de pagamento e instituições financeiras</td><td>Identificação, chave Pix, valores</td><td>Processar cobranças e repasses</td></tr>
+            <tr><td>Provedores de infraestrutura e hospedagem</td><td>Dados armazenados na Plataforma</td><td>Hospedagem, backup e continuidade do serviço</td></tr>
+            <tr><td>Provedores de comunicação e suporte</td><td>Contato e teor das mensagens</td><td>Envio de e-mails, notificações e atendimento</td></tr>
+            <tr><td>Provedores de análise e publicidade digital: Google (Google Analytics 4, Google Tag Manager e Google Ads), Meta Platforms (Meta Ads) e TikTok (TikTok Ads)</td><td>Identificadores de cookies e de dispositivo, eventos de conversão</td><td>Mensuração e veiculação de campanhas — somente mediante consentimento</td></tr>
+            <tr><td>Contabilidade e assessoria fiscal</td><td>Dados fiscais e contratuais</td><td>Escrituração e obrigações acessórias</td></tr>
+            <tr><td>Advogados e auditores</td><td>Dados necessários ao objeto</td><td>Exercício regular de direitos e conformidade</td></tr>
+            <tr><td>Autoridades públicas e judiciais</td><td>Conforme o objeto da requisição</td><td>Cumprimento de obrigação legal ou ordem judicial</td></tr>
+            <tr><td>Sucessores em operação societária</td><td>Base de dados, na medida necessária</td><td>Fusão, cisão, aquisição ou transferência de ativos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Os operadores contratados pela LABUU atuam sob instruções documentadas e, quando aplicável, mediante contrato que estabeleça obrigações compatíveis com a LGPD, incluindo confidencialidade, segurança, limitação de finalidade, atendimento a direitos dos titulares, gestão de incidentes e eliminação ou devolução dos dados ao término da relação, ressalvadas as hipóteses legais de conservação.</p>
+      <p>Em caso de operação societária, o titular será informado com antecedência razoável, e o sucessor ficará vinculado às finalidades e bases legais deste Aviso, ressalvado o direito de oposição e de eliminação previstos na Cláusula 16.</p>
+      <p>Requisições de autoridades são analisadas quanto à competência, à fundamentação e à proporcionalidade. Sempre que juridicamente possível e não houver vedação legal ou ordem de sigilo, a LABUU informará o titular sobre a requisição.</p>
+    </section>
+
+    <section class="policy-section" id="c12">
+      <div class="policy-num">Cláusula 12</div>
+      <h2>Decisões automatizadas e ordenação de oportunidades</h2>
+      <p>A Plataforma utiliza processamento automatizado para <b>ordenar e exibir oportunidades de serviço</b> a Ajudantes e para <b>sugerir Ajudantes</b> a Contratantes. Os critérios considerados são:</p>
       <ul>
-        <li>Por determinação judicial ou solicitação de autoridades competentes;</li>
-        <li>Com órgãos públicos, para cumprimento de obrigações fiscais e trabalhistas;</li>
-        <li>Com prestadores de serviço que apoiam a operação da LABUU, como processamento de pagamentos (Pix), hospedagem, contabilidade, envio de comunicações e suporte técnico;</li>
-        <li>Entre Ajudante e Contratante, na medida necessária para viabilizar a contratação (ex.: nome, foto, avaliações, telefone de contato durante o serviço);</li>
-        <li>Em caso de operação societária (fusão, aquisição, venda de ativos), quando os dados poderão ser transferidos à empresa sucessora.</li>
+        <li>proximidade aproximada entre o Ajudante e o local do serviço, quando a localização for autorizada;</li>
+        <li>região de atuação e disponibilidade declaradas pelo Ajudante;</li>
+        <li>compatibilidade entre o tipo de serviço solicitado e a experiência cadastrada;</li>
+        <li>histórico na Plataforma, incluindo avaliações recebidas e serviços concluídos;</li>
+        <li>indicadores de segurança e prevenção a fraudes.</li>
       </ul>
-      <p>Esses compartilhamentos são sempre limitados ao necessário para as finalidades descritas neste Aviso.</p>
+      <p>Esse processamento <b>não tem por finalidade realizar avaliação psicológica, médica, de crédito ou de aspectos da personalidade</b> do titular. Os critérios descritos influenciam a <b>ordem de exibição e a recomendação</b> de oportunidades.</p>
+      <p>Eventual restrição de acesso a oportunidades ocorre <b>apenas</b> por motivos de segurança, prevenção a fraudes ou descumprimento dos Termos de Uso, e está sempre sujeita à revisão prevista nesta Cláusula. A ordenação <b>não constitui atribuição de tarefas, definição de jornada, controle de disponibilidade, exigência de aceitação ou direcionamento da atividade do Ajudante</b>, que permanece livre para aceitar ou recusar qualquer oportunidade, sem penalização, redução de reputação ou restrição decorrente da recusa. A contratação depende sempre de decisão do Contratante e não é determinada pelo sistema de ordenação.</p>
+      <div class="policy-callout">
+        <p><b>Direito à revisão.</b> Nos termos do art. 20 da LGPD, o titular pode solicitar a revisão de decisão tomada unicamente com base em tratamento automatizado que afete seus interesses — incluindo suspensão de conta, restrição de acesso a oportunidades ou remoção de perfil por sinalização automatizada de fraude. O pedido é feito pelos canais da Cláusula 19, será <b>analisado por pessoa natural</b> e respondido com justificativa no prazo da Cláusula 16. A LABUU informará ainda os critérios e procedimentos utilizados, observados o segredo comercial e industrial.</p>
+      </div>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">06</div>
-      <h2>Armazenamento e transferência de dados</h2>
-      <p>Os dados pessoais tratados pela LABUU são armazenados em servidores próprios, contratados junto à Hostinger (VPS). Caso os dados sejam processados ou armazenados em servidores localizados fora do Brasil, a LABUU adota as salvaguardas exigidas pela LGPD para garantir um nível adequado de proteção, em conformidade com a legislação aplicável.</p>
-    </section>
-
-    <section class="policy-section">
-      <div class="policy-num">07</div>
-      <h2>Direitos do titular de dados pessoais</h2>
-      <p>Nos termos da LGPD, o titular tem direito a:</p>
+    <section class="policy-section" id="c13">
+      <div class="policy-num">Cláusula 13</div>
+      <h2>Armazenamento e medidas de segurança</h2>
+      <p>Os dados pessoais são armazenados em infraestrutura de hospedagem contratada pela LABUU, em serviço de VPS da <b>Hostinger</b> com localização configurada em <b>São Paulo/SP, região Sudeste do Brasil</b>. Serviços auxiliares podem envolver acesso ou processamento a partir do exterior; nessa hipótese, aplicam-se integralmente as regras da Cláusula 14.</p>
+      <p>A LABUU adota medidas técnicas e administrativas aptas a proteger os dados pessoais de acessos não autorizados e de situações acidentais ou ilícitas de destruição, perda, alteração, comunicação ou difusão, nos termos do art. 46 da LGPD, entre as quais:</p>
       <ul>
-        <li>Confirmação da existência de tratamento de dados pessoais;</li>
-        <li>Acesso aos seus dados pessoais;</li>
-        <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
-        <li>Portabilidade dos dados;</li>
-        <li>Eliminação dos dados tratados com base no consentimento, ou quando desnecessários, excessivos ou irregulares;</li>
-        <li>Informação sobre compartilhamento de dados com terceiros;</li>
-        <li>Revogação do consentimento, quando aplicável.</li>
+        <li>criptografia em trânsito (TLS) em todas as conexões com a Plataforma;</li>
+        <li>criptografia em repouso para credenciais e dados de pagamento;</li>
+        <li>armazenamento de senhas exclusivamente sob forma de <i>hash</i>, sendo tecnicamente inviável sua recuperação pela LABUU;</li>
+        <li>controle de acesso restrito por necessidade de conhecimento, com credenciais individuais e registro de acessos administrativos;</li>
+        <li>rotinas de backup e plano de recuperação;</li>
+        <li>atualização periódica de sistemas e correção de vulnerabilidades;</li>
+        <li>vinculação contratual de colaboradores e operadores a deveres de confidencialidade.</li>
       </ul>
-      <p>Solicitações podem ser feitas pelo e-mail <b>contato@labuu.com.br</b>. A LABUU poderá solicitar informações adicionais para confirmar a identidade do titular antes de atender ao pedido.</p>
+      <p>Nenhum sistema é integralmente imune a incidentes decorrentes da arquitetura aberta da internet. Por isso, recomenda-se ao titular manter senha exclusiva e não compartilhá-la, manter o aplicativo atualizado e comunicar imediatamente qualquer suspeita de acesso indevido.</p>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">08</div>
-      <h2>Medidas de segurança</h2>
-      <p>A LABUU adota medidas técnicas e organizacionais para proteger os dados pessoais contra acessos não autorizados, perda, alteração ou vazamento, incluindo controle de acesso restrito e armazenamento em ambiente seguro. Dados de pagamento são protegidos por criptografia.</p>
-      <p>Apesar dos esforços empregados, nenhuma plataforma é totalmente imune a incidentes decorrentes da própria arquitetura da internet. Recomendamos que o usuário não compartilhe sua senha com terceiros.</p>
-      <p>Em caso de incidente de segurança que possa gerar risco relevante aos titulares, a LABUU se compromete a comunicar os usuários afetados e a Autoridade Nacional de Proteção de Dados (ANPD), conforme exigido pela legislação.</p>
+    <section class="policy-section" id="c14">
+      <div class="policy-num">Cláusula 14</div>
+      <h2>Transferência internacional de dados</h2>
+      <p>A infraestrutura principal de hospedagem da Plataforma é mantida em <b>servidor VPS da Hostinger com localização configurada em São Paulo/SP, Brasil</b>. Assim, o armazenamento principal realizado nesse servidor ocorre no território brasileiro. A Hostinger disponibiliza localização de servidor VPS no Brasil, inclusive em São Paulo, sendo a localização efetiva da infraestrutura da LABUU aquela correspondente à configuração contratada e vigente no momento do tratamento.</p>
+      <p>A localização do servidor principal no Brasil <b>não significa que nenhuma operação acessória ou posterior possa envolver acesso, suporte, processamento, armazenamento de cópias ou outros tratamentos fora do território nacional</b>. Caso a Hostinger ou qualquer outro fornecedor utilizado pela LABUU realize acesso ou processamento de dados pessoais a partir do exterior, ou mantenha infraestrutura auxiliar fora do Brasil, a operação será avaliada e tratada conforme as regras de transferência internacional previstas nesta Cláusula e na legislação aplicável.</p>
+      <p>Ocorrem, atualmente, transferências internacionais relacionadas aos <b>provedores de análise e publicidade digital</b> indicados nas Cláusulas 7 e 11 — Google, Meta Platforms e TikTok —, cujas infraestruturas de processamento podem estar situadas no exterior. Essas transferências abrangem os dados efetivamente coletados por essas ferramentas, como identificadores de cookies e de dispositivo e eventos de conversão, <b>somente após o consentimento do titular quando essa for a base legal aplicável</b>, e não abrangem, segundo a configuração atualmente adotada pela LABUU, dados cadastrais, documentais, financeiros ou biométricos.</p>
+      <p>As transferências internacionais eventualmente realizadas pela LABUU observarão o art. 33 da LGPD e a Resolução CD/ANPD nº 19/2024, mediante mecanismo legalmente válido e adequado à operação concreta, incluindo, quando aplicável, as cláusulas-padrão contratuais aprovadas pela ANPD. A LABUU manterá os registros e documentos exigidos pela regulamentação aplicável e informará o titular sobre a forma, finalidade, destino, agentes envolvidos e mecanismo utilizado, na extensão exigida pela legislação.</p>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">09</div>
+    <section class="policy-section" id="c15">
+      <div class="policy-num">Cláusula 15</div>
+      <h2>Prazos de retenção e eliminação</h2>
+      <p>Os dados pessoais são mantidos pelo tempo necessário ao cumprimento das finalidades da Cláusula 8, observados os prazos abaixo.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Categoria</th><th>Prazo de retenção</th><th>Fundamento</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dados cadastrais e de perfil</td><td><b>Até 5 anos após o encerramento da conta</b>, exclusivamente para fins de exercício regular de direitos, prevenção e apuração de fraudes, atendimento de obrigações legais ou regulatórias e defesa em processos judiciais, administrativos ou arbitrais, conforme aplicável. Decorrido esse prazo, os dados serão eliminados ou anonimizados, ressalvadas as hipóteses do art. 16 da LGPD e situações em que a conservação por prazo superior seja especificamente exigida ou autorizada por lei.</td><td>Art. 16 da LGPD; exercício regular de direitos; prevenção a fraudes; obrigações legais e regulatórias</td></tr>
+            <tr><td>Documentos de identificação e comprovantes</td><td>Durante a vigência da conta e por <b>até 5 anos</b> após o seu encerramento, para prevenção a fraudes e exercício regular de direitos</td><td>Prazo prescricional; prevenção a fraudes; art. 16 da LGPD</td></tr>
+            <tr><td>Imagens de verificação de identidade</td><td>Até 180 dias após a conclusão da verificação</td><td>Necessidade e minimização — art. 6º, III</td></tr>
+            <tr><td>Dados biométricos (Cláusula 4)</td><td>Até 90 dias após a verificação, ou até a revogação do consentimento, o que ocorrer primeiro</td><td>Art. 11, I, e art. 16 da LGPD</td></tr>
+            <tr><td>Histórico de diárias, avaliações e reputação</td><td>Durante a vigência da conta; após o encerramento, mantidos de forma anonimizada para fins estatísticos</td><td>Art. 12 da LGPD</td></tr>
+            <tr><td>Dados de geolocalização</td><td><b>Até 12 meses</b> após a conclusão do serviço correspondente, ou até a revogação do consentimento quando não houver disputa em curso</td><td>Necessidade — art. 6º, III; exercício regular de direitos — art. 7º, VI</td></tr>
+            <tr><td>Documentos fiscais e registros contábeis</td><td><b>5 anos</b>, ressalvado prazo superior exigido por norma específica aplicável ao documento</td><td>Arts. 173 e 174 do Código Tributário Nacional</td></tr>
+            <tr><td>Registros de acesso a aplicações de internet (IP, data e hora)</td><td>6 meses</td><td>Art. 15 da Lei nº 12.965/2014</td></tr>
+            <tr><td>Registros de atendimento e suporte</td><td><b>5 anos</b> contados do encerramento do atendimento</td><td>Art. 27 do CDC; exercício regular de direitos</td></tr>
+            <tr><td>Dados de contato para marketing</td><td>Até a oposição ou a revogação do consentimento</td><td>Art. 8º, §5º, e art. 18, §2º</td></tr>
+            <tr><td>Dados objeto de litígio, auditoria ou requisição de autoridade</td><td>Até o trânsito em julgado ou o encerramento do procedimento</td><td>Art. 16, I e III, da LGPD</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>O prazo de <b>5 anos</b> indicado para dados cadastrais e de perfil após o encerramento da conta constitui prazo máximo de retenção pela LABUU para as finalidades descritas nesta Cláusula, não autorizando a manutenção de dados que tenham perdido sua necessidade antes desse termo final. Sempre que a finalidade puder ser atendida com prazo inferior, a LABUU deverá promover a eliminação ou anonimização antecipada, observadas as obrigações legais aplicáveis.</p>
+      <p>Encerrado o prazo de retenção ou exaurida a finalidade, os dados são eliminados de forma segura ou anonimizados de modo irreversível, ressalvadas as hipóteses do art. 16 da LGPD. Em backups e cópias de contingência, a eliminação ocorre no ciclo de sobrescrita subsequente, que <b>não excede 14 (quatorze) dias</b>, sem que os dados sejam reintroduzidos em operações ativas após o término da finalidade.</p>
+      <p>A conservação após o término do tratamento ocorre exclusivamente nas hipóteses do art. 16 da LGPD: cumprimento de obrigação legal ou regulatória, estudo por órgão de pesquisa com anonimização, transferência a terceiro com observância da lei, ou uso exclusivo da LABUU em forma anonimizada.</p>
+    </section>
+
+    <section class="policy-section" id="c16">
+      <div class="policy-num">Cláusula 16</div>
+      <h2>Direitos do titular</h2>
+      <p>Nos termos dos arts. 17 a 22 da LGPD, são assegurados ao titular os seguintes direitos, exercíveis gratuitamente e a qualquer tempo:</p>
+      <ol class="lista">
+        <li><b>Confirmação</b> da existência de tratamento;</li>
+        <li><b>Acesso</b> aos dados pessoais tratados;</li>
+        <li><b>Correção</b> de dados incompletos, inexatos ou desatualizados;</li>
+        <li><b>Anonimização, bloqueio ou eliminação</b> de dados desnecessários, excessivos ou tratados em desconformidade com a LGPD;</li>
+        <li><b>Portabilidade</b> a outro fornecedor de serviço ou produto, mediante requisição expressa, em formato estruturado e de uso comum, observados o segredo comercial e industrial;</li>
+        <li><b>Eliminação</b> dos dados tratados com base no consentimento, ressalvadas as hipóteses do art. 16;</li>
+        <li><b>Informação sobre o compartilhamento</b>, indicando as entidades públicas e privadas com as quais houve uso compartilhado;</li>
+        <li><b>Informação sobre a possibilidade de não fornecer consentimento</b> e sobre as consequências da negativa, conforme detalhado na Cláusula 10;</li>
+        <li><b>Revogação do consentimento</b>, por procedimento gratuito e facilitado, preservada a licitude do tratamento anterior;</li>
+        <li><b>Oposição</b> a tratamento fundado em hipótese de dispensa de consentimento, em caso de descumprimento da lei, e ao tratamento baseado em legítimo interesse (art. 18, §2º);</li>
+        <li><b>Revisão de decisões automatizadas</b>, nos termos do art. 20 e da Cláusula 12;</li>
+        <li><b>Peticionamento</b> perante a Autoridade Nacional de Proteção de Dados (art. 18, §1º).</li>
+      </ol>
+
+      <h3>16.1. Como exercer</h3>
+      <p>As solicitações devem ser enviadas ao Encarregado, pelo e-mail <a href="mailto:contato@labuu.com.br">contato@labuu.com.br</a>, ou pelos canais de atendimento da Plataforma, com a descrição do pedido.</p>
+
+      <h3>16.2. Prazos de resposta</h3>
+      <p>Em cumprimento ao art. 19 da LGPD, a LABUU responderá:</p>
+      <ul>
+        <li><b>imediatamente</b>, em formato simplificado, aos pedidos de confirmação de existência de tratamento ou de acesso;</li>
+        <li>em até <b>15 (quinze) dias</b> contados da requisição, quando solicitada declaração clara e completa, indicando origem dos dados, inexistência de registro, critérios e finalidade do tratamento;</li>
+        <li>em até <b>15 (quinze) dias</b> para os demais pedidos, ressalvado prazo diverso fixado em lei ou em regulamentação específica da ANPD, hipótese em que o titular será informado do prazo aplicável.</li>
+      </ul>
+
+      <h3>16.3. Verificação de identidade</h3>
+      <p>Para proteger o próprio titular contra fraudes, a LABUU poderá solicitar informações adicionais que comprovem sua identidade, limitadas ao estritamente necessário. Esses dados são utilizados exclusivamente para essa validação e eliminados em seguida.</p>
+
+      <h3>16.4. Recusa</h3>
+      <p>Caso não seja possível atender integralmente a solicitação, a LABUU comunicará ao titular, no mesmo prazo, as <b>razões de fato ou de direito</b> que impedem o atendimento, informando o direito de peticionar à ANPD. A LABUU não cobra pelo exercício de direitos nem impõe ônus desproporcionais ao titular.</p>
+    </section>
+
+    <section class="policy-section" id="c17">
+      <div class="policy-num">Cláusula 17</div>
+      <h2>Incidentes de segurança</h2>
+      <p>Na hipótese de incidente de segurança que possa acarretar risco ou dano relevante aos titulares, a LABUU comunicará <b>a ANPD e os titulares afetados</b>, nos termos do art. 48 da LGPD e da Resolução CD/ANPD nº 15/2024, no prazo de <b>3 (três) dias úteis</b>, contado conforme a regulamentação vigente da ANPD e ressalvado eventual prazo específico previsto em legislação aplicável.</p>
+      <p>A comunicação conterá, no mínimo: a descrição da natureza dos dados afetados, as informações sobre os titulares envolvidos, as medidas técnicas e de segurança utilizadas, os riscos relacionados, os motivos de eventual demora e as medidas adotadas para reverter ou mitigar os efeitos do incidente.</p>
+      <p>A LABUU mantém registro interno dos incidentes de segurança com dados pessoais e das respectivas avaliações de risco pelo prazo mínimo exigido pela regulamentação da ANPD, atualmente de <b>5 (cinco) anos</b>, sem prejuízo de prazos superiores decorrentes de obrigação legal, regulatória ou de necessidade de exercício regular de direitos.</p>
+    </section>
+
+    <section class="policy-section" id="c18">
+      <div class="policy-num">Cláusula 18</div>
       <h2>Responsabilidade</h2>
-      <p>A LABUU responde nos termos da legislação aplicável, especialmente a LGPD e o Código de Defesa do Consumidor, quando cabível. A LABUU não se responsabiliza por prejuízos decorrentes exclusivamente de conduta do usuário ou de terceiros, como fraudes ou ataques cibernéticos, desde que comprovado o cumprimento das obrigações de segurança pela LABUU.</p>
-      <p>O usuário é responsável pela veracidade e atualização das informações que fornece na plataforma.</p>
+      <p>A LABUU responde pelos danos decorrentes do tratamento de dados pessoais que realizar em desconformidade com a legislação, nos termos dos arts. 42 a 45 da LGPD e, quando cabível, do Código de Defesa do Consumidor, comprometendo-se a adotar e manter as medidas de segurança da Cláusula 13.</p>
+      <p>A responsabilidade da LABUU é excluída somente nas hipóteses previstas no art. 43 da LGPD, quais sejam: (i) não ter realizado o tratamento que lhe é atribuído; (ii) tendo realizado o tratamento, não ter havido violação à legislação de proteção de dados; ou (iii) o dano decorrer de culpa exclusiva do titular ou de terceiro. O reconhecimento dessas hipóteses depende de comprovação pela LABUU, não constituindo exclusão prévia ou automática de responsabilidade.</p>
+      <p>Ajudantes e Contratantes são responsáveis, de forma autônoma, pelo tratamento de dados pessoais que realizem por conta própria, inclusive pelo uso das informações de contato obtidas por meio da Plataforma, que devem ser empregadas exclusivamente para a execução do serviço intermediado.</p>
+      <p>O titular é responsável pela veracidade, exatidão e atualização das informações que fornece, bem como pela guarda de suas credenciais de acesso.</p>
     </section>
 
-    <section class="policy-section">
-      <div class="policy-num">10</div>
-      <h2>Término do tratamento</h2>
-      <p>Os dados pessoais serão mantidos pelo tempo necessário para cumprir as finalidades descritas neste Aviso, para atender obrigações legais ou para resguardar direitos da LABUU em eventuais disputas. Encerrada a finalidade do tratamento, os dados serão eliminados, salvo hipóteses previstas em lei.</p>
-    </section>
-
-    <section class="policy-section">
-      <div class="policy-num">11</div>
-      <h2>Encarregado de Dados Pessoais (DPO)</h2>
-      <p>Para dúvidas, solicitações ou reclamações relacionadas ao tratamento de dados pessoais, entre em contato:</p>
+    <section class="policy-section" id="c19">
+      <div class="policy-num">Cláusula 19</div>
+      <h2>Encarregado pelo tratamento de dados (DPO) e ANPD</h2>
+      <p>A LABUU indica <b>Encarregado pelo tratamento de dados pessoais</b>, nos termos do art. 41 da LGPD e da Resolução CD/ANPD nº 18/2024:</p>
       <div class="policy-contact">
         <strong>Labuu — Encarregado de Dados</strong>
+        <span style="display:block;font-size:14.5px;color:var(--ink-2);margin-bottom:4px">Encarregado titular: Felipe S. de Souza</span>
+        <span style="display:block;font-size:14.5px;color:var(--ink-2);margin-bottom:4px">Encarregado suplente: Guilherme M. de Queiroz</span>
         <a href="mailto:contato@labuu.com.br">contato@labuu.com.br</a>
+        <span style="display:block;font-size:14.5px;color:var(--ink-2);margin-top:4px">Av. Salgado Filho, nº 2120, Sala 2221C, 22º andar, Centro, Guarulhos/SP, CEP 07115-000</span>
       </div>
-      <p style="margin-top:12px">Caso não fique satisfeito com o atendimento, o titular pode registrar reclamação diretamente junto à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+      <p>Compete ao Encarregado exercer as atribuições previstas na LGPD e na regulamentação da ANPD, incluindo atuar como canal de comunicação com titulares e com a ANPD, orientar a organização e acompanhar as atividades relacionadas à proteção de dados pessoais, observadas as atribuições e condições previstas na Resolução CD/ANPD nº 18/2024.</p>
+      <p>Caso o titular não obtenha resposta satisfatória, poderá apresentar reclamação à <b>Autoridade Nacional de Proteção de Dados (ANPD)</b>, por meio dos canais oficiais disponíveis em <a href="https://www.gov.br/anpd" target="_blank" rel="noopener">gov.br/anpd</a>, bem como aos órgãos de defesa do consumidor.</p>
+    </section>
+
+    <section class="policy-section" id="c20">
+      <div class="policy-num">Cláusula 20</div>
+      <h2>Alterações deste Aviso</h2>
+      <p>Este Aviso pode ser atualizado para refletir alterações na Plataforma, nos serviços ou na legislação. A versão vigente indicará sempre o número da versão e a data de início de vigência.</p>
+      <p>Alterações substanciais — assim entendidas as que ampliem finalidades, incluam novas categorias de dados, alterem bases legais, ampliem compartilhamentos ou reduzam direitos — serão <b>comunicadas ao titular com antecedência mínima de 15 (quinze) dias</b>, por e-mail cadastrado e por aviso destacado na Plataforma.</p>
+      <p>Quando a alteração envolver tratamento fundado em consentimento, <b>a LABUU colherá novo consentimento específico e destacado</b> antes de iniciar o novo tratamento. <b>Não se admite aceitação tácita, presumida ou derivada do simples uso continuado da Plataforma</b>, em observância ao art. 8º, §§ 3º e 4º, da LGPD. O titular que não concordar com a nova versão poderá deixar de utilizar a funcionalidade correspondente ou encerrar sua conta, sem qualquer ônus e sem prejuízo dos direitos da Cláusula 16.</p>
+    </section>
+
+    <section class="policy-section" id="c21">
+      <div class="policy-num">Cláusula 21</div>
+      <h2>Legislação aplicável e disposições finais</h2>
+      <p>Este Aviso é regido pela legislação brasileira, em especial pela Lei nº 13.709/2018, pela Lei nº 12.965/2014 e seu Decreto regulamentador nº 8.771/2016, pela Lei nº 8.078/1990 e pela Lei nº 10.406/2002.</p>
+      <p>A eventual invalidade de qualquer cláusula não prejudica a validade das demais. A tolerância quanto ao descumprimento de qualquer disposição não configura novação nem renúncia de direitos.</p>
+      <p>Fica eleito o foro da Comarca de Guarulhos/SP para dirimir controvérsias decorrentes deste Aviso, <b>ressalvado o direito do titular consumidor de ajuizar demanda no foro de seu domicílio</b>, nos termos do art. 101, I, do Código de Defesa do Consumidor.</p>
     </section>
 
     <section class="policy-section">
-      <div class="policy-num">12</div>
-      <h2>Alterações deste Aviso</h2>
-      <p>Este Aviso de Privacidade pode ser atualizado periodicamente, para refletir melhorias na plataforma e adequações legais. Recomendamos que o usuário o revise com frequência. Alterações relevantes serão comunicadas de forma adequada ao usuário. O uso continuado da plataforma após uma atualização representa concordância com os novos termos.</p>
+      <div class="policy-num">Anexo</div>
+      <h2>Histórico de versões</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Versão</th><th>Data</th><th>Principais alterações</th></tr></thead>
+          <tbody>
+            <tr><td>1.0</td><td>11/09/2026</td><td>Publicação inicial</td></tr>
+            <tr><td>3.2</td><td>14/09/2026</td><td>Versão consolidada, que incorpora as revisões internas 2.0 a 3.1 da mesma data. Inclusão dos direitos de oposição e de revisão de decisões automatizadas; detalhamento de cookies, compartilhamento, transferência internacional e incidentes de segurança; declaração do tratamento de dados biométricos com base exclusiva no consentimento; fixação de prazos determinados de retenção; delimitação da finalidade não trabalhista dos registros de geolocalização e da ordenação de oportunidades; revisão das cláusulas de responsabilidade e de alteração do Aviso</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
   </div>

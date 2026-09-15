@@ -17,6 +17,24 @@ function normalizePhone(phone) {
   return (phone || "").replace(/\D/g, "");
 }
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((email || "").trim());
+}
+
+function hashPassword(password) {
+  const salt = crypto.randomBytes(16).toString("hex");
+  const hash = crypto.scryptSync(password, salt, 64).toString("hex");
+  return `${salt}:${hash}`;
+}
+
+function verifyPassword(password, stored) {
+  if (!stored || !stored.includes(":")) return false;
+  const [salt, hash] = stored.split(":");
+  const hashBuffer = Buffer.from(hash, "hex");
+  const candidateBuffer = crypto.scryptSync(password, salt, 64);
+  return hashBuffer.length === candidateBuffer.length && crypto.timingSafeEqual(hashBuffer, candidateBuffer);
+}
+
 function requireAdmin(req, res, next) {
   if (!ADMIN_PASSWORD) {
     res.status(503).send("Admin não configurado (defina ADMIN_PASSWORD).");
@@ -58,7 +76,7 @@ function readLeads() {
 }
 
 function toCsv(leads) {
-  const columns = ["ts", "nome", "telefone", "interesse", "cidade", "uf", "especialidade", "dificuldade"];
+  const columns = ["ts", "nome", "telefone", "email", "interesse", "cidade", "uf", "especialidade", "dificuldade"];
   function escapeCell(value) {
     const s = value === undefined || value === null ? "" : String(value);
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
@@ -145,11 +163,24 @@ app.post("/api/track", (req, res) => {
 });
 
 app.post("/api/lead", async (req, res) => {
-  const { nome, telefone, interesse, cidade, uf, especialidade, dificuldade } = req.body || {};
+  const { nome, telefone, email, senha, interesse, cidade, uf, especialidade, dificuldade } = req.body || {};
 
   const telefoneDigits = normalizePhone(telefone);
-  if (!nome || !nome.trim() || telefoneDigits.length < 10 || !interesse || !cidade || !especialidade || !dificuldade) {
+  const emailNormalized = (email || "").trim().toLowerCase();
+  if (!nome || !nome.trim() || telefoneDigits.length < 10 || !isValidEmail(email) ||
+    !senha || senha.length < 6 || !interesse || !cidade || !especialidade || !dificuldade) {
     res.status(400).json({ ok: false, error: "missing_fields" });
+    return;
+  }
+
+  const existingLeads = readLeads();
+  const duplicate = existingLeads.find((l) =>
+    (l.telefone && normalizePhone(l.telefone) === telefoneDigits) ||
+    (l.email && l.email.trim().toLowerCase() === emailNormalized)
+  );
+  if (duplicate) {
+    const field = duplicate.telefone && normalizePhone(duplicate.telefone) === telefoneDigits ? "telefone" : "email";
+    res.status(409).json({ ok: false, error: "already_registered", field });
     return;
   }
 
@@ -160,6 +191,8 @@ app.post("/api/lead", async (req, res) => {
     ts: new Date().toISOString(),
     nome,
     telefone,
+    email: email.trim(),
+    senhaHash: hashPassword(senha),
     interesse,
     cidade,
     uf: uf || "",
@@ -183,9 +216,9 @@ app.post("/api/lead", async (req, res) => {
 });
 
 app.post("/api/login", (req, res) => {
-  const { telefone } = req.body || {};
+  const { telefone, senha } = req.body || {};
   const telefoneDigits = normalizePhone(telefone);
-  if (telefoneDigits.length < 10) {
+  if (telefoneDigits.length < 10 || !senha) {
     res.status(400).json({ ok: false, error: "missing_fields" });
     return;
   }
@@ -196,7 +229,7 @@ app.post("/api/login", (req, res) => {
     for (let i = lines.length - 1; i >= 0; i--) {
       const lead = JSON.parse(lines[i]);
       if (lead.telefone && normalizePhone(lead.telefone) === telefoneDigits) {
-        matched = true;
+        matched = verifyPassword(senha, lead.senhaHash);
         break;
       }
     }
@@ -205,7 +238,7 @@ app.post("/api/login", (req, res) => {
   }
 
   if (!matched) {
-    res.status(401).json({ ok: false, error: "not_found" });
+    res.status(401).json({ ok: false, error: "invalid_credentials" });
     return;
   }
   res.json({ ok: true });

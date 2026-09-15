@@ -112,13 +112,14 @@ async function load() {
     }
 
     let html = "<table><thead><tr>" +
-      "<th>Data</th><th>Nome</th><th>Telefone</th><th>Interesse</th><th>Cidade</th><th>Especialidade</th><th>Dificuldade</th>" +
+      "<th>Data</th><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Interesse</th><th>Cidade</th><th>Especialidade</th><th>Dificuldade</th>" +
       "</tr></thead><tbody>";
     for (const l of leads) {
       html += "<tr>" +
         "<td>" + esc(fmtDate(l.ts)) + "</td>" +
         "<td>" + esc(l.nome) + "</td>" +
         "<td>" + esc(l.telefone) + "</td>" +
+        "<td>" + esc(l.email) + "</td>" +
         "<td><span class=\"tag\">" + esc(l.interesse) + "</span></td>" +
         "<td>" + esc(l.cidade) + (l.uf ? " · " + esc(l.uf) : "") + "</td>" +
         "<td>" + esc(l.especialidade) + "</td>" +
