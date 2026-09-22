@@ -897,8 +897,8 @@ function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
       setError("Informe um e-mail válido.");
       return;
     }
-    if (form.senha.length < 6) {
-      setError("A senha precisa ter pelo menos 6 caracteres.");
+    if (form.senha.length < 8) {
+      setError("A senha precisa ter pelo menos 8 caracteres.");
       return;
     }
     if (form.confirmarSenha !== form.senha) {
@@ -1003,7 +1003,7 @@ function CadastroModal({ step, onClose, onSuccess, onSwitchStep }) {
               <label className="cadastro-label">
                 Crie uma senha
                 <input type="password" required autoComplete="new-password" value={form.senha}
-                  onChange={(e) => update("senha", e.target.value)} placeholder="Mínimo 6 caracteres" />
+                  onChange={(e) => update("senha", e.target.value)} placeholder="Mínimo 8 caracteres" />
               </label>
               <label className="cadastro-label">
                 Confirme sua senha
