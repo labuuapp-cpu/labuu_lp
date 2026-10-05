@@ -8,6 +8,14 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 } /*EDITMODE-END*/;
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JF9DPRxdNcTEAchIvnKHmw?s=cl&p=a&ilr=4";
+const CADASTRO_URL = "https://labuu-labuu-aplicativo.w7mwle.easypanel.host/cadastro";
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=app.labuu.com.br";
+const isAndroid = () => /android/i.test(navigator.userAgent);
+// iPadOS 13+ reports a Mac user agent, so a touch-capable "Mac" is an iPad.
+const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+// On Android the CTAs open the Play Store, so they invite a download instead of a signup.
+const CTA_LABEL = isAndroid() ? "Baixe já" : "Faça cadastro";
 
 // ───────────────────── Conteúdo por audiência ─────────────────────
 const CONTENT = {
@@ -211,6 +219,26 @@ function PlayBadge({ orange = false, big = false, onOpen }) {
         <strong>Google Play</strong>
       </span>
     </button>);
+
+}
+
+// ───────────────────── Store buttons (per device) ─────────────────────
+// iOS has no app yet: show "em breve na App Store" + a web entry instead of Google Play.
+function StoreButtons({ onOpen }) {
+  if (!isIOS()) return <PlayBadge orange big onOpen={onOpen} />;
+  return (
+    <div className="store-row">
+      <div className="ps-btn is-soon" aria-disabled="true">
+        <svg className="icon" viewBox="0 0 384 512" aria-hidden="true">
+          <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+        </svg>
+        <span className="lbl">
+          <small>EM BREVE NA</small>
+          <strong>App Store</strong>
+        </span>
+      </div>
+      <a href={CADASTRO_URL} className="web-link">ou entre pela web →</a>
+    </div>);
 
 }
 
@@ -771,7 +799,7 @@ function PrelaunchModal({ onClose, onContinue }) {
         <h3>O app Labuu está chegando — e você pode garantir sua vaga antes de todo mundo</h3>
         <p>Faça seu cadastro agora e garanta sua vaga no aplicativo assim que ele for lançado.</p>
         <button type="button" className="prelaunch-cta" onClick={onContinue}>
-          👉 Cadastrar agora
+          👉 {isAndroid() ? "Baixe já" : "Cadastrar agora"}
         </button>
       </div>
     </div>);
@@ -1133,7 +1161,7 @@ function App() {
   const [audience, setAudience] = useState("ajudante");
   const [modalStep, setModalStep] = useState("closed"); // closed | intro | form | login | success
   const [scrolled, setScrolled] = useState(false);
-  const openCadastro = () => setModalStep("form");
+  const openCadastro = () => { window.location.href = isAndroid() ? PLAY_STORE_URL : CADASTRO_URL; };
   const closeModal = () => setModalStep("closed");
 
   useEffect(() => {
@@ -1174,7 +1202,7 @@ function App() {
             <a href="#faq">Dúvidas</a>
           </div>
           <button type="button" className="nav-cta" onClick={openCadastro}>
-            Faça cadastro <span>→</span>
+            {CTA_LABEL} <span>→</span>
           </button>
         </div>
       </nav>
@@ -1196,7 +1224,7 @@ function App() {
             </p>
 
             <div className="hero-cta">
-              <PlayBadge orange big onOpen={openCadastro} />
+              <StoreButtons onOpen={openCadastro} />
               <div className="hero-micro">
                 {c.micro[0] && <><b>{c.micro[0]}</b><br /></>}
                 {c.micro[1]}
@@ -1366,7 +1394,7 @@ function App() {
             </div>
             <div className="footer-download">
               <div className="footer-eyebrow">Baixe agora · grátis</div>
-              <PlayBadge orange big onOpen={openCadastro} />
+              <StoreButtons onOpen={openCadastro} />
             </div>
           </div>
 
@@ -1401,7 +1429,7 @@ function App() {
       {/* Sticky CTA (mobile) */}
       <button type="button" onClick={openCadastro}
       className={`sticky-cta ${scrolled ? "show" : ""}`}>
-        <span>Faça cadastro</span>
+        <span>{CTA_LABEL}</span>
         <span className="arrow">→</span>
       </button>
 
