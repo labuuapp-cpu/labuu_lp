@@ -12,6 +12,7 @@ COPY admin.html ./
 COPY index.html public/index.html
 COPY privacidade.html public/privacidade.html
 COPY termos.html public/termos.html
+COPY baixar.html public/baixar/index.html
 COPY app.jsx public/app.jsx
 COPY tweaks-panel.jsx public/tweaks-panel.jsx
 COPY assets/ public/assets/

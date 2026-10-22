@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Labuu — Conectando quem precisa de ajudante com quem precisa de serviço</title>
+<meta name="description" content="Obra, pintura, elétrica e serviços gerais. Baixe grátis o app da Labuu na Play Store." />
+
+<!-- Card de prévia (Facebook, WhatsApp): o crawler lê estas tags e não roda o JavaScript abaixo -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://labuu.com.br/baixar/" />
+<meta property="og:site_name" content="Labuu" />
+<meta property="og:title" content="Conectando quem precisa de ajudante com quem precisa de serviço" />
+<meta property="og:description" content="Obra, pintura, elétrica e serviços gerais. Baixe grátis o app da Labuu na Play Store." />
+<meta property="og:image" content="https://labuu.com.br/assets/og/labuu-og-conexao.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Ajudante e contratante apertando as mãos na obra, com o passo a passo do app Labuu" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/png" href="/assets/favicon.png" />
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; background: #fff; color: #001743; text-align: center; padding: 24px; box-sizing: border-box; }
+  a { display: inline-block; margin-top: 16px; background: #E06A10; color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 700; text-decoration: none; }
+</style>
+<script>
+  // Quem chega pelo link dos grupos vai direto para a Play Store; o referrer marca a origem no Play Console.
+  var PLAY = "https://play.google.com/store/apps/details?id=app.labuu.com.br" +
+    "&referrer=" + encodeURIComponent("utm_source=" + (new URLSearchParams(location.search).get("utm_source") || "facebook") +
+    "&utm_medium=" + (new URLSearchParams(location.search).get("utm_medium") || "grupos") +
+    "&utm_campaign=" + (new URLSearchParams(location.search).get("utm_campaign") || "conexao"));
+  location.replace(PLAY);
+</script>
+</head>
+<body>
+  <div>
+    <p>Abrindo a Play Store…</p>
+    <a href="https://play.google.com/store/apps/details?id=app.labuu.com.br&amp;referrer=utm_source%3Dfacebook%26utm_medium%3Dgrupos%26utm_campaign%3Dconexao">Baixar a Labuu</a>
+  </div>
+</body>
+</html>
