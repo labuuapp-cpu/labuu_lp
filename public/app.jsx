@@ -3,7 +3,7 @@ const { useState, useEffect, useRef } = React;
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "dark": false,
-  "accent": "#E47310",
+  "accent": "#F26D10",
   "headline": "C"
 } /*EDITMODE-END*/;
 
@@ -31,7 +31,6 @@ const CONTENT = {
     },
     stats: [
     { num: "Serviço todo dia.", lbl: "" },
-    { num: "Sem\nTaxas", lbl: "" },
     { num: "Pagamento Garantido", lbl: "" }],
 
     pains: [
@@ -48,7 +47,7 @@ const CONTENT = {
     steps: [
     { n: "01", title: "Baixa o app e cria seu perfil", desc: "Nome, tipo de serviço e região. Leva 5 minutos. Tudo gratuito." },
     { n: "02", title: "Contratantes te encontram", desc: "Quando precisam de reforço, abrem o app e veem seu histórico de trabalho." },
-    { n: "03", title: "Recebe o chamado direto", desc: "Sem enrolação. Sem taxas. Sem esperar conhecido te chamar." },
+    { n: "03", title: "Recebe o chamado direto", desc: "Sem enrolação. Sem esperar conhecido te chamar." },
     { n: "04", title: "Pagamento garantido", desc: "Dinheiro fica retido na plataforma antes de você começar e liberado em até 24h após o fim do serviço." }],
 
     solTitle: "Seu histórico fala por você.",
@@ -1194,7 +1193,7 @@ function App() {
       <nav className="nav">
         <div className="wrap nav-inner">
           <div className="logo">
-            <img className="logo-wordmark" src="assets/labuu-wordmark-orange.png" alt="Labuu" />
+            <img className="logo-wordmark" src="assets/labuu-logo-branco-com-slogan.png" alt="Labuu — O app do ajudante" />
           </div>
           <div className="nav-links">
             <a href="#como-funciona">Como funciona</a>
@@ -1234,7 +1233,7 @@ function App() {
             <div style={{ marginTop: 32, marginBottom: -24, fontWeight: 700, fontSize: 19, color: "var(--ink)" }}>
               Na <span style={{ color: "var(--accent)" }}>Labuu</span> você tem ajudante:
             </div>
-            <div className="proofstrip">
+            <div className="proofstrip" style={{ gridTemplateColumns: c.stats.map(() => "1fr").join(" 1px ") }}>
               {c.stats.map((s, i) =>
               <React.Fragment key={i}>
                   {i > 0 && <div className="divider"></div>}
@@ -1250,16 +1249,6 @@ function App() {
           <PhoneMockup audience={audience} key={"phone-" + audience} />
         </div>
       </header>
-
-      {/* Marquee */}
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee-track">
-          <span>servente</span><span>carregador</span><span>demolição</span>
-          <span>limpeza pós-obra</span><span>diarista de obra</span>
-          <span>servente</span><span>carregador</span><span>demolição</span>
-          <span>limpeza pós-obra</span><span>diarista de obra</span>
-        </div>
-      </div>
 
       {/* Dor */}
       <section data-screen-label="02 Dor" key={"dor-" + audience}>
@@ -1443,7 +1432,7 @@ function App() {
         <TweakSection label="Tema" />
         <TweakToggle label="Modo escuro" value={t.dark} onChange={(v) => setTweak("dark", v)} />
         <TweakColor label="Cor de destaque" value={t.accent}
-        options={["#E47310", "#FF5A1F", "#F4A300", "#1F8A5B", "#0D7DDB", "#0D0D0D"]}
+        options={["#F26D10", "#E47310", "#FF5A1F", "#F4A300", "#1F8A5B", "#0D7DDB", "#0D0D0D"]}
         onChange={(v) => setTweak("accent", v)} />
 
         <TweakSection label="Headline" />
