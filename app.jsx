@@ -9,7 +9,12 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JF9DPRxdNcTEAchIvnKHmw?s=cl&p=a&ilr=4";
 const CADASTRO_URL = "https://labuu-labuu-aplicativo.w7mwle.easypanel.host/cadastro";
-const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=app.labuu.com.br";
+// The referrer tags installs from the site in Play Console; utm_* in the page URL (e.g. the Instagram bio link) override the defaults.
+const siteParams = new URLSearchParams(location.search);
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=app.labuu.com.br" +
+  "&referrer=" + encodeURIComponent("utm_source=" + (siteParams.get("utm_source") || "site") +
+  "&utm_medium=" + (siteParams.get("utm_medium") || "home") +
+  "&utm_campaign=" + (siteParams.get("utm_campaign") || "lp"));
 const isAndroid = () => /android/i.test(navigator.userAgent);
 // iPadOS 13+ reports a Mac user agent, so a touch-capable "Mac" is an iPad.
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) ||
