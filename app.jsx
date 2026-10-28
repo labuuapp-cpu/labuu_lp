@@ -1403,16 +1403,21 @@ function App() {
               <a href="https://wa.me/551129378525" target="_blank" rel="noopener noreferrer">Suporte</a>
             </div>
             <div className="footer-social">
-              <a href="https://instagram.com/labuuapp" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/labuu_app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="3" width="18" height="18" rx="5" />
                   <circle cx="12" cy="12" r="4" />
                   <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
                 </svg>
               </a>
-              <a href="https://facebook.com/labuuapp" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61590239515616" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.14 8.44 9.94v-7.03H7.9v-2.91h2.54v-2.2c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.85h2.78l-.44 2.91h-2.34V22c4.78-.8 8.44-4.94 8.44-9.94z" />
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/@labuuapp" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.36-2.49V9.66a5.73 5.73 0 0 0-.76-.05 5.69 5.69 0 0 0-5.69 5.69A5.69 5.69 0 0 0 9.86 21a5.69 5.69 0 0 0 5.69-5.69V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.3 4.3 0 0 1-3.25-1.48z" />
                 </svg>
               </a>
             </div>
