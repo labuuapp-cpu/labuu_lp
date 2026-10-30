@@ -24,12 +24,18 @@
   a { display: inline-block; margin-top: 16px; background: #E06A10; color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 700; text-decoration: none; }
 </style>
 <script>
+  // Link de indicação de um ajudante (?ref=CODIGO): passa pelo app antes, que guarda o código no
+  // navegador e só então manda pra Play Store. O app Android abre esse mesmo site, então o cadastro
+  // já vem com a indicação.
+  var REF = new URLSearchParams(location.search).get("ref");
+  if (REF) location.replace("https://labuu-labuu-aplicativo.w7mwle.easypanel.host/indicacao?ref=" + encodeURIComponent(REF));
+
   // Quem chega pelo link dos grupos vai direto para a Play Store; o referrer marca a origem no Play Console.
-  var PLAY = "https://play.google.com/store/apps/details?id=app.labuu.com.br" +
+  var PLAY ="https://play.google.com/store/apps/details?id=app.labuu.com.br" +
     "&referrer=" + encodeURIComponent("utm_source=" + (new URLSearchParams(location.search).get("utm_source") || "facebook") +
     "&utm_medium=" + (new URLSearchParams(location.search).get("utm_medium") || "grupos") +
     "&utm_campaign=" + (new URLSearchParams(location.search).get("utm_campaign") || "conexao"));
-  location.replace(PLAY);
+  if (!REF) location.replace(PLAY);
 </script>
 </head>
 <body>
