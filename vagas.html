@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vagas abertas na Labuu</title>
+<meta name="description" content="Veja as vagas de ajudante abertas perto de você e se candidate pelo app da Labuu." />
+
+<!-- Card de prévia (WhatsApp, Facebook): o crawler lê estas tags e não roda o JavaScript abaixo -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://labuu.com.br/vagas/" />
+<meta property="og:site_name" content="Labuu" />
+<meta property="og:title" content="Vagas abertas na Labuu" />
+<meta property="og:description" content="Veja as vagas de ajudante perto de você e se candidate pelo app." />
+<meta property="og:image" content="https://labuu.com.br/assets/og/labuu-og-conexao-v2.jpg" />
+<meta property="og:image:width" content="2400" />
+<meta property="og:image:height" content="1260" />
+<meta property="og:image:alt" content="Ajudante e contratante apertando as mãos na obra, com o passo a passo do app Labuu" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/png" href="/assets/favicon.png" />
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; background: #fff; color: #001743; text-align: center; padding: 24px; box-sizing: border-box; }
+  a { display: inline-block; margin-top: 16px; background: #E06A10; color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 700; text-decoration: none; }
+  a.secundario { background: transparent; color: #E06A10; padding: 8px 0; font-weight: 600; }
+</style>
+<script>
+  // Link curto pra divulgar vagas no WhatsApp: leva direto pra lista de vagas do ajudante no app.
+  // O app Android (TWA) abre esse mesmo site, então quem tem o app cai dentro dele já logado.
+  // A query string é repassada (ex.: ?vaga=ID, se um dia a lista passar a destacar uma vaga).
+  location.replace("https://labuu-labuu-aplicativo.w7mwle.easypanel.host/prestador/jobs" + location.search);
+</script>
+</head>
+<body>
+  <div>
+    <p>Abrindo as vagas da Labuu…</p>
+    <a href="https://labuu-labuu-aplicativo.w7mwle.easypanel.host/prestador/jobs">Ver vagas</a><br />
+    <a class="secundario" href="https://labuu.com.br/baixar">Ainda não tem o app? Baixe aqui</a>
+  </div>
+</body>
+</html>
